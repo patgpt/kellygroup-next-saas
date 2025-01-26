@@ -1,0 +1,45 @@
+name: Database Migration
+description: Request schema changes or data updates
+title: "[DB] "
+labels: ["db-migration"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Migration Details
+        What changes are needed in the database?
+  - type: textarea
+    id: description
+    attributes:
+      label: Migration Description
+      description: Describe the schema or data changes
+      placeholder: |
+        - Table: [Table Name]
+        - Columns: [Columns to Add/Modify/Remove]
+        - Data: [Data to Migrate]
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How urgent is this migration?
+      options:
+        - "Urgent (Blocks production)"
+        - "High (Next release)"
+        - "Medium (Scheduled update)"
+        - "Low (Backlog)"
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact Analysis
+      description: What systems or features will be affected?
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add SQL scripts, diagrams, or references

@@ -1,0 +1,44 @@
+# feature-request.yaml
+name: Feature Request
+description: Suggest a new feature or enhancement
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Feature Description
+        What problem does this feature solve?
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Details
+      description: Describe the feature and its benefits
+      placeholder: |
+        - What should it do?
+        - How will it work?
+        - Who will use it?
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature?
+      options:
+        - "Critical (Must have)"
+        - "High (Should have)"
+        - "Medium (Nice to have)"
+        - "Low (Future consideration)"
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: Are there any existing workarounds?
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add mockups, links, or examples

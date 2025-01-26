@@ -1,0 +1,50 @@
+# content-update
+name: Content Update
+description: Request changes to CMS content
+title: "[Content] "
+labels: ["cms-update"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Content Details
+        What needs to be updated?
+  - type: dropdown
+    id: locale
+    attributes:
+      label: Language
+      description: Which locale is affected?
+      options:
+        - "English (en)"
+        - "French (fr)"
+    validations:
+      required: true
+  - type: textarea
+    id: changes
+    attributes:
+      label: Requested Changes
+      description: Describe the updates needed
+      placeholder: |
+        - Page: [Page Name]
+        - Section: [Section Name]
+        - Current Content: [Existing Text]
+        - New Content: [Proposed Text]
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How urgent is this update?
+      options:
+        - "Urgent (Publish immediately)"
+        - "High (Next release)"
+        - "Medium (Scheduled update)"
+        - "Low (Backlog)"
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add screenshots, links, or references
