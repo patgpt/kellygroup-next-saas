@@ -1,0 +1,12 @@
+{
+  "HomePage": {
+    "title": "Bonjour le monde !",
+    "about": "Aller à la page à propos"
+  },
+  "UI": {
+    "language": "Langue",
+    "theme": "Thème",
+    "dark": "Sombre",
+    "light": "Clair"
+  }
+}

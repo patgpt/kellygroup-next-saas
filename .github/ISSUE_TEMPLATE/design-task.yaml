@@ -1,0 +1,44 @@
+# design-task.yaml
+name: Design Task
+description: Request new UI/UX designs or updates
+title: "[Design] "
+labels: ["design-task"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Design Requirements
+        What needs to be designed or updated?
+  - type: textarea
+    id: description
+    attributes:
+      label: Task Details
+      description: Describe the design requirements
+      placeholder: |
+        - Purpose: [What is this for?]
+        - Pages: [Which pages are affected?]
+        - Components: [Which components need updates?]
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How urgent is this task?
+      options:
+        - "Urgent (Blocks development)"
+        - "High (Next sprint)"
+        - "Medium (Scheduled work)"
+        - "Low (Backlog)"
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Add links to inspiration, mockups, or examples
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add screenshots, user flows, or notes

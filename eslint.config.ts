@@ -11,9 +11,16 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
+  ...compat.extends("plugin:tailwindcss/recommended"),
   {
     rules: {
       "react/jsx-no-literals": "error",
+    },
+    settings: {
+      tailwindcss: {
+        callees: ["twMerge", "createTheme"],
+        classRegex: "^(class(Name)|theme)?$",
+      },
     },
   },
 ];
