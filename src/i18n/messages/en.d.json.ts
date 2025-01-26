@@ -5,6 +5,12 @@ declare const messages: {
   "HomePage": {
     "title": "Hello world!",
     "about": "Go to the about page"
+  },
+  "UI": {
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light"
   }
 };
 export default messages;

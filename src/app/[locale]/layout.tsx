@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Locale, NextIntlClientProvider } from "next-intl";
 import { routing } from "../../i18n/routing";
 import { getMessages, setRequestLocale } from "next-intl/server";
+import LanguageSwitcher from "@/components/LanguageSelect";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -36,6 +37,7 @@ export default async function RootLayout({
           className={cn(fontSans.variable, fontMono.variable, "antialiased")}
         >
           <NextIntlClientProvider messages={messages}>
+            <LanguageSwitcher />
             {children}
           </NextIntlClientProvider>
         </body>
