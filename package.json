@@ -9,8 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^16.0.1",
+    "@contentful/rich-text-types": "^17.0.0",
     "@types/eslint__eslintrc": "^2.1.2",
+    "@vercel/postgres": "^0.10.0",
     "clsx": "^2.1.1",
+    "drizzle-orm": "^0.38.4",
     "flowbite": "^3.0.0",
     "flowbite-react": "^0.10.2",
     "next": "15.1.6",
