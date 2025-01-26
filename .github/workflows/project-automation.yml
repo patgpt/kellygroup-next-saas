@@ -1,0 +1,40 @@
+name: KellyGroup Project Automation
+on:
+  issues:
+    types: [opened, labeled, closed]
+  pull_request:
+    types: [opened, ready_for_review, closed]
+
+env:
+  PROJECT_NUMBER: 12
+  OWNER: patgpt
+
+jobs:
+  project-sync:
+    runs-on: ubuntu-latest
+    environment: Production
+    permissions:
+      # Required permissions for user-owned projects
+      contents: read
+      issues: write
+      pull-requests: write
+      actions: write
+
+    steps:
+      - name: Add to Project
+        uses: actions/add-to-project@v1
+        with:
+          project-url: https://github.com/users/${{ env.OWNER }}/projects/${{ env.PROJECT_NUMBER }}
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+
+      - name: Sync Project Board
+        uses: konradpabjan/action-project-board@v3.1
+        with:
+          owner: ${{ env.OWNER }}
+          project-number: ${{ env.PROJECT_NUMBER }}
+          owner-type: user
+          column-mapping: |
+            "priority:high" → "In Progress"
+            "cms-update" → "Content Updates"
+            "design-task" → "UI/UX Review"
+          github-token: ${{ secrets.PROJECT_TOKEN }}
