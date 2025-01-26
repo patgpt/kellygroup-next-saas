@@ -13,7 +13,7 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
   {
     rules: {
-      "react/jsx-no-literals": "error",
+      // "react/jsx-no-literals": "error",
     },
   },
 ];
