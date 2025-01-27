@@ -2,8 +2,15 @@
 
 import { useTransition } from "react";
 import { useRouter } from "@/i18n/routing";
-import { Dropdown, DropdownItem } from "flowbite-react";
 import { useTranslations } from "next-intl";
+import { Languages } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function LanguageSwitcher() {
   const router = useRouter();
@@ -17,16 +24,21 @@ export default function LanguageSwitcher() {
   }
 
   return (
-    <Dropdown
-      label={isPending ? "Loading..." : t("language")}
-      dismissOnClick={false}
-      color="blue"
-      size="sm"
-      trigger="hover"
-      className="rounded-lg font-medium"
-    >
-      <DropdownItem onClick={() => onSelect("en")}>English</DropdownItem>
-      <DropdownItem onClick={() => onSelect("fr")}>Français</DropdownItem>
-    </Dropdown>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="icon">
+          <Languages className="h-[1.2rem] w-[1.2rem]" />
+          <span className="sr-only">Select language</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => onSelect("en")}>
+          English
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => onSelect("fr")}>
+          Français
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

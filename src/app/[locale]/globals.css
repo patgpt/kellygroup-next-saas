@@ -1,44 +1,70 @@
 @import "tailwindcss";
-@plugin "flowbite/plugin";
-@source "../node_modules/flowbite";
+@plugin "tailwindcss-animate";
 
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Light Theme */
+  --color-background: hsl(0, 0%, 99%); /* White */
+  --color-foreground: hsl(315, 77%, 5%); /* Licorice */
+  --color-card: hsl(0, 0%, 99%); /* White */
+  --color-card-foreground: hsl(315, 77%, 5%); /* Licorice */
+  --color-popover: hsl(0, 0%, 99%); /* White */
+  --color-popover-foreground: hsl(315, 77%, 5%); /* Licorice */
+  --color-primary: hsl(208, 53%, 32%); /* Yinmn Blue */
+  --color-primary-foreground: hsl(0, 0%, 99%); /* White */
+  --color-secondary: hsl(299, 46%, 49%); /* Steel Pink */
+  --color-secondary-foreground: hsl(0, 0%, 99%); /* White */
+  --color-muted: hsl(219, 47%, 80%); /* Powder Blue */
+  --color-muted-foreground: hsl(315, 77%, 5%); /* Licorice */
+  --color-accent: hsl(219, 47%, 80%); /* Powder Blue */
+  --color-accent-foreground: hsl(315, 77%, 5%); /* Licorice */
+  --color-destructive: hsl(0, 100%, 50%); /* Red for errors */
+  --color-destructive-foreground: hsl(0, 0%, 99%); /* White */
+  --color-border: hsl(219, 47%, 80%); /* Powder Blue */
+  --color-input: hsl(219, 47%, 80%); /* Powder Blue */
+  --color-ring: hsl(208, 53%, 32%); /* Yinmn Blue */
+
+  /* Border Radius */
+  --radius: 0.5rem;
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+@layer theme {
+  .dark {
+    /* Dark Theme */
+    --color-background: hsl(315, 77%, 5%); /* Licorice */
+    --color-foreground: hsl(0, 0%, 99%); /* White */
+    --color-card: hsl(315, 77%, 5%); /* Licorice */
+    --color-card-foreground: hsl(0, 0%, 99%); /* White */
+    --color-popover: hsl(315, 77%, 5%); /* Licorice */
+    --color-popover-foreground: hsl(0, 0%, 99%); /* White */
+    --color-primary: hsl(219, 47%, 80%); /* Powder Blue */
+    --color-primary-foreground: hsl(315, 77%, 5%); /* Licorice */
+    --color-secondary: hsl(299, 46%, 49%); /* Steel Pink */
+    --color-secondary-foreground: hsl(0, 0%, 99%); /* White */
+    --color-muted: hsl(208, 53%, 32%); /* Yinmn Blue */
+    --color-muted-foreground: hsl(219, 47%, 80%); /* Powder Blue */
+    --color-accent: hsl(208, 53%, 32%); /* Yinmn Blue */
+    --color-accent-foreground: hsl(219, 47%, 80%); /* Powder Blue */
+    --color-destructive: hsl(0, 100%, 50%); /* Red for errors */
+    --color-destructive-foreground: hsl(0, 0%, 99%); /* White */
+    --color-border: hsl(208, 53%, 32%); /* Yinmn Blue */
+    --color-input: hsl(208, 53%, 32%); /* Yinmn Blue */
+    --color-ring: hsl(219, 47%, 80%); /* Powder Blue */
+  }
+}
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
-  ::after,
   ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+  ::after {
+    border-color: var(--color-border);
   }
-}
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    color: var(--color-foreground);
+    background: var(--color-background);
+    font-family: var(--font-sans);
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
