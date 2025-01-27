@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { Flowbite } from "flowbite-react";
-import { fontSans, fontMono } from "@/lib/fonts";
-import { cn } from "@/lib/utils";
-import { Locale, NextIntlClientProvider } from "next-intl";
-import { routing } from "../../i18n/routing";
-import { getMessages, setRequestLocale } from "next-intl/server";
 import LanguageSwitcher from "@/components/LanguageSelect";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import ModeToggle from "@/components/ThemeToggle";
+import { fontMono, fontSans } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
+import type { Metadata } from "next";
+import { Locale, NextIntlClientProvider } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import { routing } from "../../i18n/routing";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,17 +32,27 @@ export default async function RootLayout({
   // Enable static rendering
   setRequestLocale(locale);
   return (
-    <Flowbite>
-      <html lang={locale ?? routing.defaultLocale}>
-        <body
-          className={cn(fontSans.variable, fontMono.variable, "antialiased")}
-        >
-          <NextIntlClientProvider messages={messages}>
+    <html lang={locale ?? routing.defaultLocale} suppressHydrationWarning>
+      <body
+        className={cn(
+          fontSans.variable,
+          fontMono.variable,
+          "bg-background dark:bg-accent flex h-screen w-full flex-col items-center justify-start antialiased",
+        )}
+      >
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ModeToggle />
             <LanguageSwitcher />
             {children}
-          </NextIntlClientProvider>
-        </body>
-      </html>
-    </Flowbite>
+          </ThemeProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }

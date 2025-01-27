@@ -1,4 +1,4 @@
-import "./[locale]/global.css";
+import "./[locale]/globals.css";
 
 interface RootLayoutProps {
   children: React.ReactNode;
