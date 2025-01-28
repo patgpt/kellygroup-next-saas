@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import { getContentful } from "../contentful-management-client";
+import type { CreateEntryProps } from "contentful-management";
 
 dotenv.config();
 
@@ -7,7 +8,7 @@ const client = getContentful();
 
 (async () => {
   try {
-    const entryData = {
+    const entryData: CreateEntryProps = {
       fields: {
         name: {
           "en-US": "Homepage SEO",
