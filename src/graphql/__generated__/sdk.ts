@@ -2495,6 +2495,7 @@ export type ComponentSeoFilter = {
 export type ComponentSeoLinkingCollections = {
   __typename?: 'ComponentSeoLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageHomeCollection?: Maybe<PageHomeCollection>;
 };
 
 
@@ -2504,6 +2505,30 @@ export type ComponentSeoLinkingCollectionsEntryCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
+
+
+export type ComponentSeoLinkingCollectionsPageHomeCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentSeoLinkingCollectionsPageHomeCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ComponentSeoLinkingCollectionsPageHomeCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
 
 export enum ComponentSeoOrder {
   CanonicalUrlAsc = 'canonicalUrl_ASC',
@@ -3733,7 +3758,7 @@ export type PageHome = Entry & _Node & {
   internalName?: Maybe<Scalars['String']['output']>;
   linkedFrom?: Maybe<PageHomeLinkingCollections>;
   process?: Maybe<ComponentProcess>;
-  seo?: Maybe<Entry>;
+  seo?: Maybe<ComponentSeo>;
   slug?: Maybe<Scalars['String']['output']>;
   sys: Sys;
 };
@@ -3790,6 +3815,7 @@ export type PageHomeProcessArgs = {
 export type PageHomeSeoArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<ComponentSeoFilter>;
 };
 
 
@@ -3852,6 +3878,7 @@ export type PageHomeFilter = {
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   process?: InputMaybe<CfComponentProcessNestedFilter>;
   process_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  seo?: InputMaybe<CfComponentSeoNestedFilter>;
   seo_exists?: InputMaybe<Scalars['Boolean']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   slug_contains?: InputMaybe<Scalars['String']['input']>;
@@ -4911,6 +4938,104 @@ export type CfComponentProcessNestedFilter = {
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type CfComponentSeoNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfComponentSeoNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfComponentSeoNestedFilter>>>;
+  canonicalUrl?: InputMaybe<Scalars['String']['input']>;
+  canonicalUrl_contains?: InputMaybe<Scalars['String']['input']>;
+  canonicalUrl_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  canonicalUrl_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  canonicalUrl_not?: InputMaybe<Scalars['String']['input']>;
+  canonicalUrl_not_contains?: InputMaybe<Scalars['String']['input']>;
+  canonicalUrl_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  metaDescription?: InputMaybe<Scalars['String']['input']>;
+  metaDescription_contains?: InputMaybe<Scalars['String']['input']>;
+  metaDescription_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  metaDescription_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  metaDescription_not?: InputMaybe<Scalars['String']['input']>;
+  metaDescription_not_contains?: InputMaybe<Scalars['String']['input']>;
+  metaDescription_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  metaTitle?: InputMaybe<Scalars['String']['input']>;
+  metaTitle_contains?: InputMaybe<Scalars['String']['input']>;
+  metaTitle_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  metaTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  metaTitle_not?: InputMaybe<Scalars['String']['input']>;
+  metaTitle_not_contains?: InputMaybe<Scalars['String']['input']>;
+  metaTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  name_contains?: InputMaybe<Scalars['String']['input']>;
+  name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  name_not?: InputMaybe<Scalars['String']['input']>;
+  name_not_contains?: InputMaybe<Scalars['String']['input']>;
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  openGraphDescription?: InputMaybe<Scalars['String']['input']>;
+  openGraphDescription_contains?: InputMaybe<Scalars['String']['input']>;
+  openGraphDescription_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  openGraphDescription_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  openGraphDescription_not?: InputMaybe<Scalars['String']['input']>;
+  openGraphDescription_not_contains?: InputMaybe<Scalars['String']['input']>;
+  openGraphDescription_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  openGraphImage_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  openGraphTitle?: InputMaybe<Scalars['String']['input']>;
+  openGraphTitle_contains?: InputMaybe<Scalars['String']['input']>;
+  openGraphTitle_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  openGraphTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  openGraphTitle_not?: InputMaybe<Scalars['String']['input']>;
+  openGraphTitle_not_contains?: InputMaybe<Scalars['String']['input']>;
+  openGraphTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  robotsFollow?: InputMaybe<Scalars['Boolean']['input']>;
+  robotsFollow_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  robotsFollow_not?: InputMaybe<Scalars['Boolean']['input']>;
+  robotsIndex?: InputMaybe<Scalars['Boolean']['input']>;
+  robotsIndex_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  robotsIndex_not?: InputMaybe<Scalars['Boolean']['input']>;
+  schemaJsonLd?: InputMaybe<Scalars['String']['input']>;
+  schemaJsonLd_contains?: InputMaybe<Scalars['String']['input']>;
+  schemaJsonLd_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  schemaJsonLd_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  schemaJsonLd_not?: InputMaybe<Scalars['String']['input']>;
+  schemaJsonLd_not_contains?: InputMaybe<Scalars['String']['input']>;
+  schemaJsonLd_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  schemaType?: InputMaybe<Scalars['String']['input']>;
+  schemaType_contains?: InputMaybe<Scalars['String']['input']>;
+  schemaType_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  schemaType_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  schemaType_not?: InputMaybe<Scalars['String']['input']>;
+  schemaType_not_contains?: InputMaybe<Scalars['String']['input']>;
+  schemaType_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  slug_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  slug_not?: InputMaybe<Scalars['String']['input']>;
+  slug_not_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sys?: InputMaybe<SysFilter>;
+  twitterCardType?: InputMaybe<Scalars['String']['input']>;
+  twitterCardType_contains?: InputMaybe<Scalars['String']['input']>;
+  twitterCardType_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  twitterCardType_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  twitterCardType_not?: InputMaybe<Scalars['String']['input']>;
+  twitterCardType_not_contains?: InputMaybe<Scalars['String']['input']>;
+  twitterCardType_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  twitterDescription?: InputMaybe<Scalars['String']['input']>;
+  twitterDescription_contains?: InputMaybe<Scalars['String']['input']>;
+  twitterDescription_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  twitterDescription_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  twitterDescription_not?: InputMaybe<Scalars['String']['input']>;
+  twitterDescription_not_contains?: InputMaybe<Scalars['String']['input']>;
+  twitterDescription_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  twitterTitle?: InputMaybe<Scalars['String']['input']>;
+  twitterTitle_contains?: InputMaybe<Scalars['String']['input']>;
+  twitterTitle_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  twitterTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  twitterTitle_not?: InputMaybe<Scalars['String']['input']>;
+  twitterTitle_not_contains?: InputMaybe<Scalars['String']['input']>;
+  twitterTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type CfComponentServiceOverviewNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfComponentServiceOverviewNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfComponentServiceOverviewNestedFilter>>>;
@@ -5142,6 +5267,57 @@ export const AppSettingsFieldsFragmentDoc = /*#__PURE__*/ gql`
   }
 }
     ${NavigationItemsCollectionFieldsFragmentDoc}`;
+export const SeoFieldsFragmentDoc = /*#__PURE__*/ gql`
+    fragment SeoFields on ComponentSeo {
+  name
+  slug
+  metaTitle
+  metaDescription
+  canonicalUrl
+  openGraphTitle
+  openGraphImage {
+    ...ImageFields
+  }
+  openGraphDescription
+  robotsIndex
+  robotsFollow
+  schemaJsonLd
+  schemaType
+  twitterTitle
+  twitterDescription
+  twitterCardType
+}
+    ${ImageFieldsFragmentDoc}`;
+export const CtaFieldsFragmentDoc = /*#__PURE__*/ gql`
+    fragment CTAFields on ComponentCta {
+  sys {
+    id
+  }
+  heading
+  subheading
+  buttonText
+  buttonLink
+  backgroundImage {
+    ...ImageFields
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+export const HeroFieldsFragmentDoc = /*#__PURE__*/ gql`
+    fragment HeroFields on ComponentHero {
+  sys {
+    id
+  }
+  heading
+  subheading
+  backgroundImage {
+    ...ImageFields
+  }
+  callToAction {
+    ...CTAFields
+  }
+}
+    ${ImageFieldsFragmentDoc}
+${CtaFieldsFragmentDoc}`;
 export const GetAppSettingsDocument = /*#__PURE__*/ gql`
     query getAppSettings($locale: String, $preview: Boolean) {
   appSettingsCollection(locale: $locale, preview: $preview, limit: 2) {
@@ -5151,16 +5327,39 @@ export const GetAppSettingsDocument = /*#__PURE__*/ gql`
   }
 }
     ${AppSettingsFieldsFragmentDoc}`;
+export const GetHomePageDocument = /*#__PURE__*/ gql`
+    query getHomePage($locale: String!, $preview: Boolean) {
+  pageHomeCollection(locale: $locale, preview: $preview, limit: 1) {
+    items {
+      sys {
+        id
+      }
+      seo {
+        ...SeoFields
+      }
+      slug
+      hero {
+        ...HeroFields
+      }
+    }
+  }
+}
+    ${SeoFieldsFragmentDoc}
+${HeroFieldsFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
 const GetAppSettingsDocumentString = print(GetAppSettingsDocument);
+const GetHomePageDocumentString = print(GetHomePageDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     getAppSettings(variables?: GetAppSettingsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetAppSettingsQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetAppSettingsQuery>(GetAppSettingsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAppSettings', 'query', variables);
+    },
+    getHomePage(variables: GetHomePageQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetHomePageQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetHomePageQuery>(GetHomePageDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getHomePage', 'query', variables);
     }
   };
 }
@@ -5169,7 +5368,11 @@ export type AppSettingsFieldsFragment = { __typename?: 'AppSettings', appTitle?:
 
 export type NavigationItemsCollectionFieldsFragment = { __typename?: 'ComponentNavigationItemsCollection', items: Array<{ __typename?: 'ComponentNavigationItem', name?: string | null, slug?: string | null, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> };
 
+export type CtaFieldsFragment = { __typename?: 'ComponentCta', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null };
+
 export type ImageFieldsFragment = { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null };
+
+export type SeoFieldsFragment = { __typename?: 'ComponentSeo', name?: string | null, slug?: string | null, metaTitle?: string | null, metaDescription?: string | null, canonicalUrl?: string | null, openGraphTitle?: string | null, openGraphDescription?: string | null, robotsIndex?: boolean | null, robotsFollow?: boolean | null, schemaJsonLd?: string | null, schemaType?: string | null, twitterTitle?: string | null, twitterDescription?: string | null, twitterCardType?: string | null, openGraphImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null };
 
 export type GetAppSettingsQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -5178,3 +5381,13 @@ export type GetAppSettingsQueryVariables = Exact<{
 
 
 export type GetAppSettingsQuery = { __typename?: 'Query', appSettingsCollection?: { __typename?: 'AppSettingsCollection', items: Array<{ __typename?: 'AppSettings', appTitle?: string | null, headerNavigation?: { __typename?: 'ComponentNavigation', itemsCollection?: { __typename?: 'ComponentNavigationItemsCollection', items: Array<{ __typename?: 'ComponentNavigationItem', name?: string | null, slug?: string | null, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null } | null, footerNavigation?: { __typename?: 'ComponentNavigation', itemsCollection?: { __typename?: 'ComponentNavigationItemsCollection', items: Array<{ __typename?: 'ComponentNavigationItem', name?: string | null, slug?: string | null, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null } | null } | null> } | null };
+
+export type GetHomePageQueryVariables = Exact<{
+  locale: Scalars['String']['input'];
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type GetHomePageQuery = { __typename?: 'Query', pageHomeCollection?: { __typename?: 'PageHomeCollection', items: Array<{ __typename?: 'PageHome', slug?: string | null, sys: { __typename?: 'Sys', id: string }, seo?: { __typename?: 'ComponentSeo', name?: string | null, slug?: string | null, metaTitle?: string | null, metaDescription?: string | null, canonicalUrl?: string | null, openGraphTitle?: string | null, openGraphDescription?: string | null, robotsIndex?: boolean | null, robotsFollow?: boolean | null, schemaJsonLd?: string | null, schemaType?: string | null, twitterTitle?: string | null, twitterDescription?: string | null, twitterCardType?: string | null, openGraphImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null, hero?: { __typename?: 'ComponentHero', heading?: string | null, subheading?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, callToAction?: { __typename?: 'ComponentCta', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null } | null } | null> } | null };
+
+export type HeroFieldsFragment = { __typename?: 'ComponentHero', heading?: string | null, subheading?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, callToAction?: { __typename?: 'ComponentCta', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null };

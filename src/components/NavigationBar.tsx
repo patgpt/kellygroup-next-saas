@@ -22,76 +22,65 @@ import {
   CollapsibleContent,
 } from "@/components/ui/collapsible"; // Import Collapsible components
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { getContentful } from "@/lib/contentful";
+import { getLocale } from "next-intl/server";
+import { draftMode } from "next/headers";
+import type { ComponentNavigation } from "@/graphql/__generated__/sdk";
 
-function NavigationBar() {
+async function NavigationBar() {
+  const locale = await getLocale();
+  const { isEnabled: preview } = await draftMode();
+  const client = getContentful(preview);
+  const appSettings = await client.getAppSettings({
+    locale: locale,
+    preview: preview,
+  });
+  const data = appSettings.data?.appSettingsCollection?.items[0];
+  const title = data?.appTitle ?? "KellyGroup";
+  const navigation = data?.headerNavigation?.itemsCollection?.items;
   return (
     <div className="bg-primary text-accent-foreground dark:bg-accent dark:text-accent-background sticky top-0 z-50 flex w-full items-center justify-between border-b p-4 shadow-2xl">
       {/* Site Title */}
       <I18nNavigationLink href="/" className="text-lg font-bold">
-        KellyGroup
+        {title}
       </I18nNavigationLink>
 
       {/* Desktop Navigation Menu (hidden on small screens) */}
       <div className="hidden md:flex">
         <NavigationMenu>
           <NavigationMenuList>
-            <NavigationMenuItem>
-              <I18nNavigationLink
-                href="/"
-                className="hover:bg-accent rounded-sm px-4 py-2"
-              >
-                Home
-              </I18nNavigationLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <I18nNavigationLink
-                href="/about"
-                className="hover:bg-accent rounded-sm px-4 py-2"
-              >
-                About
-              </I18nNavigationLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="hover:bg-accent rounded-sm px-4 py-2">
-                Services
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[200px] gap-1 p-2">
-                  <li>
-                    <I18nNavigationLink
-                      href="/services/web-design"
-                      className="hover:bg-accent block rounded-sm px-4 py-2"
-                    >
-                      Web Design
-                    </I18nNavigationLink>
-                  </li>
-                  <li>
-                    <I18nNavigationLink
-                      href="/services/branding"
-                      className="hover:bg-accent block rounded-sm px-4 py-2"
-                    >
-                      Branding
-                    </I18nNavigationLink>
-                  </li>
-                  <li>
-                    <I18nNavigationLink
-                      href="/services/consulting"
-                      className="hover:bg-accent block rounded-sm px-4 py-2"
-                    >
-                      Consulting
-                    </I18nNavigationLink>
-                  </li>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <I18nNavigationLink
-                href="/contact"
-                className="hover:bg-accent rounded-sm px-4 py-2"
-              >
-                Contact
-              </I18nNavigationLink>
-            </NavigationMenuItem>
+            {navigation?.map((item, index) => {
+              return (
+                <NavigationMenuItem
+                  className="btn bg-foreground hover:bg-accent rounded-md p-2 shadow-md"
+                  key={index}
+                >
+                  <I18nNavigationLink
+                    href={item?.slug!}
+                    className="text-primary-foreground px-4 py-4"
+                  >
+                    {item?.name!}
+                  </I18nNavigationLink>
+
+                  {/* <NavigationMenuContent>
+                    <ul className="flex flex-col space-y-2">
+                      {item.children?.map((child, index) => {
+                        return (
+                          <li key={index}>
+                            <I18nNavigationLink
+                              href={child.link}
+                              className="px-4 py-2"
+                            >
+                              {child.label}
+                            </I18nNavigationLink>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </NavigationMenuContent> */}
+                </NavigationMenuItem>
+              );
+            })}
           </NavigationMenuList>
         </NavigationMenu>
       </div>

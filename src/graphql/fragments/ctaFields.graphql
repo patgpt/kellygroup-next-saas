@@ -1,0 +1,12 @@
+fragment CTAFields on ComponentCta {
+  sys {
+    id
+  }
+  heading
+  subheading
+  buttonText
+  buttonLink
+  backgroundImage {
+    ...ImageFields
+  }
+}

@@ -1735,6 +1735,22 @@ input ComponentSeoFilter {
 
 type ComponentSeoLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageHomeCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageHomeCollectionOrder], preview: Boolean, skip: Int = 0): PageHomeCollection
+}
+
+enum ComponentSeoLinkingCollectionsPageHomeCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum ComponentSeoOrder {
@@ -2648,7 +2664,7 @@ type PageHome implements Entry & _Node {
   internalName(locale: String): String
   linkedFrom(allowedLocales: [String]): PageHomeLinkingCollections
   process(locale: String, preview: Boolean, where: ComponentProcessFilter): ComponentProcess
-  seo(locale: String, preview: Boolean): Entry
+  seo(locale: String, preview: Boolean, where: ComponentSeoFilter): ComponentSeo
   slug(locale: String): String
   sys: Sys!
 }
@@ -2705,6 +2721,7 @@ input PageHomeFilter {
   internalName_not_in: [String]
   process: cfComponentProcessNestedFilter
   process_exists: Boolean
+  seo: cfComponentSeoNestedFilter
   seo_exists: Boolean
   slug: String
   slug_contains: String
@@ -3290,6 +3307,104 @@ input cfComponentProcessNestedFilter {
   title_not: String
   title_not_contains: String
   title_not_in: [String]
+}
+
+input cfComponentSeoNestedFilter {
+  AND: [cfComponentSeoNestedFilter]
+  OR: [cfComponentSeoNestedFilter]
+  canonicalUrl: String
+  canonicalUrl_contains: String
+  canonicalUrl_exists: Boolean
+  canonicalUrl_in: [String]
+  canonicalUrl_not: String
+  canonicalUrl_not_contains: String
+  canonicalUrl_not_in: [String]
+  contentfulMetadata: ContentfulMetadataFilter
+  metaDescription: String
+  metaDescription_contains: String
+  metaDescription_exists: Boolean
+  metaDescription_in: [String]
+  metaDescription_not: String
+  metaDescription_not_contains: String
+  metaDescription_not_in: [String]
+  metaTitle: String
+  metaTitle_contains: String
+  metaTitle_exists: Boolean
+  metaTitle_in: [String]
+  metaTitle_not: String
+  metaTitle_not_contains: String
+  metaTitle_not_in: [String]
+  name: String
+  name_contains: String
+  name_exists: Boolean
+  name_in: [String]
+  name_not: String
+  name_not_contains: String
+  name_not_in: [String]
+  openGraphDescription: String
+  openGraphDescription_contains: String
+  openGraphDescription_exists: Boolean
+  openGraphDescription_in: [String]
+  openGraphDescription_not: String
+  openGraphDescription_not_contains: String
+  openGraphDescription_not_in: [String]
+  openGraphImage_exists: Boolean
+  openGraphTitle: String
+  openGraphTitle_contains: String
+  openGraphTitle_exists: Boolean
+  openGraphTitle_in: [String]
+  openGraphTitle_not: String
+  openGraphTitle_not_contains: String
+  openGraphTitle_not_in: [String]
+  robotsFollow: Boolean
+  robotsFollow_exists: Boolean
+  robotsFollow_not: Boolean
+  robotsIndex: Boolean
+  robotsIndex_exists: Boolean
+  robotsIndex_not: Boolean
+  schemaJsonLd: String
+  schemaJsonLd_contains: String
+  schemaJsonLd_exists: Boolean
+  schemaJsonLd_in: [String]
+  schemaJsonLd_not: String
+  schemaJsonLd_not_contains: String
+  schemaJsonLd_not_in: [String]
+  schemaType: String
+  schemaType_contains: String
+  schemaType_exists: Boolean
+  schemaType_in: [String]
+  schemaType_not: String
+  schemaType_not_contains: String
+  schemaType_not_in: [String]
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+  twitterCardType: String
+  twitterCardType_contains: String
+  twitterCardType_exists: Boolean
+  twitterCardType_in: [String]
+  twitterCardType_not: String
+  twitterCardType_not_contains: String
+  twitterCardType_not_in: [String]
+  twitterDescription: String
+  twitterDescription_contains: String
+  twitterDescription_exists: Boolean
+  twitterDescription_in: [String]
+  twitterDescription_not: String
+  twitterDescription_not_contains: String
+  twitterDescription_not_in: [String]
+  twitterTitle: String
+  twitterTitle_contains: String
+  twitterTitle_exists: Boolean
+  twitterTitle_in: [String]
+  twitterTitle_not: String
+  twitterTitle_not_contains: String
+  twitterTitle_not_in: [String]
 }
 
 input cfComponentServiceOverviewNestedFilter {
