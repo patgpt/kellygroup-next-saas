@@ -1,0 +1,3 @@
+fragment appSettings on AppSettings {
+  appTitle
+}
