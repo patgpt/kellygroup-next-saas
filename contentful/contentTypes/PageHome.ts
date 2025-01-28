@@ -1,4 +1,5 @@
 import type { CreateContentTypeProps } from "contentful-management";
+import { createAndPublishContentType } from "./operations";
 
 export const PageHome: CreateContentTypeProps = {
   name: "Page Home",
@@ -106,3 +107,6 @@ export const PageHome: CreateContentTypeProps = {
     },
   ],
 };
+
+
+await createAndPublishContentType("PageHome", PageHome);

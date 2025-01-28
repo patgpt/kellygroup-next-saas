@@ -9,7 +9,7 @@ export const routing = defineRouting({
   localeDetection: true,
   // The top-level segment of the URL that will be used to determine the locale
   localePrefix: "always",
-    
+    
 });
 
 // Lightweight wrappers around Next.js' navigation APIs

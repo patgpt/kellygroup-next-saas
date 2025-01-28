@@ -20,10 +20,8 @@ const config: CodegenConfig = {
     "!src/graphql/__generated__/**/*", // Exclude generated files
   ],
   watch: true,
-    
   overwrite: true,
   generates: {
-
     // Generate the GraphQL schema as an SDL file
     "src/graphql/__generated__/schema.graphql": {
       plugins: ["schema-ast"],
