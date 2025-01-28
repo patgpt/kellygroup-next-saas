@@ -8,6 +8,8 @@ import { Locale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "../../i18n/routing";
 import "./globals.css";
+import NavigationBar from "@/components/NavigationBar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -47,9 +49,9 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <ModeToggle />
-            <LanguageSwitcher />
+            <NavigationBar />
             {children}
+            <Footer />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
