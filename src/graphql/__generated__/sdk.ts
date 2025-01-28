@@ -2495,13 +2495,24 @@ export type ComponentSeoFilter = {
 export type ComponentSeoLinkingCollections = {
   __typename?: 'ComponentSeoLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageBlogPostCollection?: Maybe<PageBlogPostCollection>;
   pageHomeCollection?: Maybe<PageHomeCollection>;
+  pageServiceCollection?: Maybe<PageServiceCollection>;
 };
 
 
 export type ComponentSeoLinkingCollectionsEntryCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type ComponentSeoLinkingCollectionsPageBlogPostCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentSeoLinkingCollectionsPageBlogPostCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -2514,6 +2525,38 @@ export type ComponentSeoLinkingCollectionsPageHomeCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
+
+
+export type ComponentSeoLinkingCollectionsPageServiceCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentSeoLinkingCollectionsPageServiceCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ComponentSeoLinkingCollectionsPageBlogPostCollectionOrder {
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  FeaturedAsc = 'featured_ASC',
+  FeaturedDesc = 'featured_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  PublishedDateAsc = 'publishedDate_ASC',
+  PublishedDateDesc = 'publishedDate_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
 
 export enum ComponentSeoLinkingCollectionsPageHomeCollectionOrder {
   InternalNameAsc = 'internalName_ASC',
@@ -2528,6 +2571,23 @@ export enum ComponentSeoLinkingCollectionsPageHomeCollectionOrder {
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export enum ComponentSeoLinkingCollectionsPageServiceCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
 }
 
 export enum ComponentSeoOrder {
@@ -3427,7 +3487,7 @@ export type PageBlogPost = Entry & _Node & {
   linkedFrom?: Maybe<PageBlogPostLinkingCollections>;
   publishedDate?: Maybe<Scalars['DateTime']['output']>;
   relatedPostsCollection?: Maybe<PageBlogPostRelatedPostsCollection>;
-  seo?: Maybe<Entry>;
+  seo?: Maybe<ComponentSeo>;
   slug?: Maybe<Scalars['String']['output']>;
   sys: Sys;
   tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
@@ -3509,6 +3569,7 @@ export type PageBlogPostRelatedPostsCollectionArgs = {
 export type PageBlogPostSeoArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<ComponentSeoFilter>;
 };
 
 
@@ -3625,6 +3686,7 @@ export type PageBlogPostFilter = {
   publishedDate_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   relatedPosts?: InputMaybe<CfPageBlogPostNestedFilter>;
   relatedPostsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  seo?: InputMaybe<CfComponentSeoNestedFilter>;
   seo_exists?: InputMaybe<Scalars['Boolean']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   slug_contains?: InputMaybe<Scalars['String']['input']>;
@@ -3929,7 +3991,7 @@ export type PageService = Entry & _Node & {
   featuredImage?: Maybe<Asset>;
   internalName?: Maybe<Scalars['String']['output']>;
   linkedFrom?: Maybe<PageServiceLinkingCollections>;
-  seo?: Maybe<Entry>;
+  seo?: Maybe<ComponentSeo>;
   serviceOverview?: Maybe<ComponentServiceOverview>;
   slug?: Maybe<Scalars['String']['output']>;
   sys: Sys;
@@ -3986,6 +4048,7 @@ export type PageServiceLinkedFromArgs = {
 export type PageServiceSeoArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<ComponentSeoFilter>;
 };
 
 
@@ -4073,6 +4136,7 @@ export type PageServiceFilter = {
   internalName_not?: InputMaybe<Scalars['String']['input']>;
   internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  seo?: InputMaybe<CfComponentSeoNestedFilter>;
   seo_exists?: InputMaybe<Scalars['Boolean']['input']>;
   serviceOverview?: InputMaybe<CfComponentServiceOverviewNestedFilter>;
   serviceOverview_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -5288,6 +5352,77 @@ export const SeoFieldsFragmentDoc = /*#__PURE__*/ gql`
   twitterCardType
 }
     ${ImageFieldsFragmentDoc}`;
+export const AuthorFieldsFragmentDoc = /*#__PURE__*/ gql`
+    fragment AuthorFields on ComponentAuthor {
+  sys {
+    id
+  }
+  name
+  bio
+  profilePicture {
+    ...ImageFields
+  }
+  socialLinksCollection {
+    items {
+      sys {
+        id
+      }
+      name
+      href
+      image {
+        ...ImageFields
+      }
+      displayText
+    }
+  }
+}
+    ${ImageFieldsFragmentDoc}`;
+export const BlogPostFieldsFragmentDoc = /*#__PURE__*/ gql`
+    fragment BlogPostFields on PageBlogPost {
+  sys {
+    id
+  }
+  seo {
+    ...SeoFields
+  }
+  slug
+  title
+  description
+  featuredImage {
+    ...ImageFields
+  }
+  content {
+    json
+    links {
+      entries {
+        block {
+          sys {
+            id
+          }
+        }
+      }
+    }
+  }
+  author {
+    ...AuthorFields
+  }
+}
+    ${SeoFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}
+${AuthorFieldsFragmentDoc}`;
+export const SocialLinkFieldsFragmentDoc = /*#__PURE__*/ gql`
+    fragment SocialLinkFields on ComponentLink {
+  sys {
+    id
+  }
+  name
+  href
+  image {
+    ...ImageFields
+  }
+  displayText
+}
+    ${ImageFieldsFragmentDoc}`;
 export const CtaFieldsFragmentDoc = /*#__PURE__*/ gql`
     fragment CTAFields on ComponentCta {
   sys {
@@ -5318,6 +5453,93 @@ export const HeroFieldsFragmentDoc = /*#__PURE__*/ gql`
 }
     ${ImageFieldsFragmentDoc}
 ${CtaFieldsFragmentDoc}`;
+export const HomePageFragmentFragmentDoc = /*#__PURE__*/ gql`
+    fragment HomePageFragment on PageHome {
+  sys {
+    id
+  }
+  seo {
+    ...SeoFields
+  }
+  slug
+  hero {
+    ...HeroFields
+  }
+}
+    ${SeoFieldsFragmentDoc}
+${HeroFieldsFragmentDoc}`;
+export const FaqFieldsFragmentDoc = /*#__PURE__*/ gql`
+    fragment FaqFields on ComponentFaq {
+  sys {
+    id
+  }
+  question
+  answer
+}
+    `;
+export const TestimonialFieldsFragmentDoc = /*#__PURE__*/ gql`
+    fragment TestimonialFields on ComponentTestimonial {
+  sys {
+    id
+  }
+  quote
+  clientName
+  clientPosition
+  clientImage {
+    ...ImageFields
+  }
+  company
+  testimonialDate
+}
+    ${ImageFieldsFragmentDoc}`;
+export const ServiceOverViewFragmentDoc = /*#__PURE__*/ gql`
+    fragment ServiceOverView on ComponentServiceOverview {
+  sys {
+    id
+  }
+  title
+  description
+  icon {
+    ...ImageFields
+  }
+  ctaText
+  ctaLink
+}
+    ${ImageFieldsFragmentDoc}`;
+export const ServicePageFieldsFragmentDoc = /*#__PURE__*/ gql`
+    fragment ServicePageFields on PageService {
+  title
+  seo {
+    ...SeoFields
+  }
+  description
+  faqsCollection {
+    items {
+      ...FaqFields
+    }
+  }
+  testimonialsCollection {
+    items {
+      ...TestimonialFields
+    }
+  }
+  slug
+  featuredImage {
+    ...ImageFields
+  }
+  serviceOverview {
+    ...ServiceOverView
+  }
+  cta {
+    ...CTAFields
+  }
+}
+    ${SeoFieldsFragmentDoc}
+${FaqFieldsFragmentDoc}
+${TestimonialFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}
+${ServiceOverViewFragmentDoc}
+${CtaFieldsFragmentDoc}`;
 export const GetAppSettingsDocument = /*#__PURE__*/ gql`
     query getAppSettings($locale: String, $preview: Boolean) {
   appSettingsCollection(locale: $locale, preview: $preview, limit: 2) {
@@ -5327,52 +5549,122 @@ export const GetAppSettingsDocument = /*#__PURE__*/ gql`
   }
 }
     ${AppSettingsFieldsFragmentDoc}`;
+export const GetBlogPostBySlugDocument = /*#__PURE__*/ gql`
+    query getBlogPostBySlug($locale: String!, $preview: Boolean, $slug: String) {
+  pageBlogPostCollection(
+    locale: $locale
+    preview: $preview
+    limit: 1
+    where: {slug: $slug}
+  ) {
+    items {
+      ...BlogPostFields
+    }
+  }
+}
+    ${BlogPostFieldsFragmentDoc}`;
+export const GetAllBlogPostsDocument = /*#__PURE__*/ gql`
+    query getAllBlogPosts($locale: String!, $preview: Boolean) {
+  pageBlogPostCollection(locale: $locale, preview: $preview, limit: 5) {
+    items {
+      ...BlogPostFields
+    }
+  }
+}
+    ${BlogPostFieldsFragmentDoc}`;
 export const GetHomePageDocument = /*#__PURE__*/ gql`
     query getHomePage($locale: String!, $preview: Boolean) {
   pageHomeCollection(locale: $locale, preview: $preview, limit: 1) {
     items {
-      sys {
-        id
-      }
-      seo {
-        ...SeoFields
-      }
-      slug
-      hero {
-        ...HeroFields
-      }
+      ...HomePageFragment
     }
   }
 }
-    ${SeoFieldsFragmentDoc}
-${HeroFieldsFragmentDoc}`;
+    ${HomePageFragmentFragmentDoc}`;
+export const GetAllServicesDocument = /*#__PURE__*/ gql`
+    query getAllServices($locale: String, $preview: Boolean, $limit: Int) {
+  pageServiceCollection(limit: $limit, preview: $preview, locale: $locale) {
+    items {
+      ...ServicePageFields
+    }
+  }
+}
+    ${ServicePageFieldsFragmentDoc}`;
+export const GetServiceBySlugDocument = /*#__PURE__*/ gql`
+    query getServiceBySlug($locale: String, $preview: Boolean, $limit: Int, $slug: String) {
+  pageServiceCollection(
+    limit: $limit
+    preview: $preview
+    locale: $locale
+    where: {slug: $slug}
+  ) {
+    items {
+      ...ServicePageFields
+    }
+  }
+}
+    ${ServicePageFieldsFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
 const GetAppSettingsDocumentString = print(GetAppSettingsDocument);
+const GetBlogPostBySlugDocumentString = print(GetBlogPostBySlugDocument);
+const GetAllBlogPostsDocumentString = print(GetAllBlogPostsDocument);
 const GetHomePageDocumentString = print(GetHomePageDocument);
+const GetAllServicesDocumentString = print(GetAllServicesDocument);
+const GetServiceBySlugDocumentString = print(GetServiceBySlugDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     getAppSettings(variables?: GetAppSettingsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetAppSettingsQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetAppSettingsQuery>(GetAppSettingsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAppSettings', 'query', variables);
     },
+    getBlogPostBySlug(variables: GetBlogPostBySlugQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetBlogPostBySlugQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetBlogPostBySlugQuery>(GetBlogPostBySlugDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getBlogPostBySlug', 'query', variables);
+    },
+    getAllBlogPosts(variables: GetAllBlogPostsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetAllBlogPostsQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetAllBlogPostsQuery>(GetAllBlogPostsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllBlogPosts', 'query', variables);
+    },
     getHomePage(variables: GetHomePageQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetHomePageQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetHomePageQuery>(GetHomePageDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getHomePage', 'query', variables);
+    },
+    getAllServices(variables?: GetAllServicesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetAllServicesQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetAllServicesQuery>(GetAllServicesDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getAllServices', 'query', variables);
+    },
+    getServiceBySlug(variables?: GetServiceBySlugQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: GetServiceBySlugQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<GetServiceBySlugQuery>(GetServiceBySlugDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getServiceBySlug', 'query', variables);
     }
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;
 export type AppSettingsFieldsFragment = { __typename?: 'AppSettings', appTitle?: string | null, headerNavigation?: { __typename?: 'ComponentNavigation', itemsCollection?: { __typename?: 'ComponentNavigationItemsCollection', items: Array<{ __typename?: 'ComponentNavigationItem', name?: string | null, slug?: string | null, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null } | null, footerNavigation?: { __typename?: 'ComponentNavigation', itemsCollection?: { __typename?: 'ComponentNavigationItemsCollection', items: Array<{ __typename?: 'ComponentNavigationItem', name?: string | null, slug?: string | null, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null } | null };
 
-export type NavigationItemsCollectionFieldsFragment = { __typename?: 'ComponentNavigationItemsCollection', items: Array<{ __typename?: 'ComponentNavigationItem', name?: string | null, slug?: string | null, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> };
+export type AuthorFieldsFragment = { __typename?: 'ComponentAuthor', name?: string | null, bio?: string | null, sys: { __typename?: 'Sys', id: string }, profilePicture?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, socialLinksCollection?: { __typename?: 'ComponentAuthorSocialLinksCollection', items: Array<{ __typename?: 'ComponentLink', name?: string | null, href?: string | null, displayText?: string | null, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null };
+
+export type BlogPostFieldsFragment = { __typename?: 'PageBlogPost', slug?: string | null, title?: string | null, description?: string | null, sys: { __typename?: 'Sys', id: string }, seo?: { __typename?: 'ComponentSeo', name?: string | null, slug?: string | null, metaTitle?: string | null, metaDescription?: string | null, canonicalUrl?: string | null, openGraphTitle?: string | null, openGraphDescription?: string | null, robotsIndex?: boolean | null, robotsFollow?: boolean | null, schemaJsonLd?: string | null, schemaType?: string | null, twitterTitle?: string | null, twitterDescription?: string | null, twitterCardType?: string | null, openGraphImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null, featuredImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, content?: { __typename?: 'PageBlogPostContent', json: any, links: { __typename?: 'PageBlogPostContentLinks', entries: { __typename?: 'PageBlogPostContentEntries', block: Array<{ __typename?: 'AppSettings', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentAuthor', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentCta', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentFaq', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentFeature', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentHero', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentImageGallery', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentLink', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentNavigation', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentNavigationItem', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentProcess', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentSection', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentSeo', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentService', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentServiceOverview', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentStep', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentTestimonial', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'PageBlogPost', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'PageHome', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'PageService', sys: { __typename?: 'Sys', id: string } } | null> } } } | null, author?: { __typename?: 'ComponentAuthor', name?: string | null, bio?: string | null, sys: { __typename?: 'Sys', id: string }, profilePicture?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, socialLinksCollection?: { __typename?: 'ComponentAuthorSocialLinksCollection', items: Array<{ __typename?: 'ComponentLink', name?: string | null, href?: string | null, displayText?: string | null, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null } | null };
 
 export type CtaFieldsFragment = { __typename?: 'ComponentCta', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null };
 
+export type FaqFieldsFragment = { __typename?: 'ComponentFaq', question?: string | null, answer?: string | null, sys: { __typename?: 'Sys', id: string } };
+
+export type HeroFieldsFragment = { __typename?: 'ComponentHero', heading?: string | null, subheading?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, callToAction?: { __typename?: 'ComponentCta', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null };
+
 export type ImageFieldsFragment = { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null };
 
+export type SocialLinkFieldsFragment = { __typename?: 'ComponentLink', name?: string | null, href?: string | null, displayText?: string | null, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null };
+
+export type NavigationItemsCollectionFieldsFragment = { __typename?: 'ComponentNavigationItemsCollection', items: Array<{ __typename?: 'ComponentNavigationItem', name?: string | null, slug?: string | null, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> };
+
+export type HomePageFragmentFragment = { __typename?: 'PageHome', slug?: string | null, sys: { __typename?: 'Sys', id: string }, seo?: { __typename?: 'ComponentSeo', name?: string | null, slug?: string | null, metaTitle?: string | null, metaDescription?: string | null, canonicalUrl?: string | null, openGraphTitle?: string | null, openGraphDescription?: string | null, robotsIndex?: boolean | null, robotsFollow?: boolean | null, schemaJsonLd?: string | null, schemaType?: string | null, twitterTitle?: string | null, twitterDescription?: string | null, twitterCardType?: string | null, openGraphImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null, hero?: { __typename?: 'ComponentHero', heading?: string | null, subheading?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, callToAction?: { __typename?: 'ComponentCta', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null } | null };
+
+export type ServicePageFieldsFragment = { __typename?: 'PageService', title?: string | null, description?: string | null, slug?: string | null, seo?: { __typename?: 'ComponentSeo', name?: string | null, slug?: string | null, metaTitle?: string | null, metaDescription?: string | null, canonicalUrl?: string | null, openGraphTitle?: string | null, openGraphDescription?: string | null, robotsIndex?: boolean | null, robotsFollow?: boolean | null, schemaJsonLd?: string | null, schemaType?: string | null, twitterTitle?: string | null, twitterDescription?: string | null, twitterCardType?: string | null, openGraphImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null, faqsCollection?: { __typename?: 'PageServiceFaqsCollection', items: Array<{ __typename?: 'ComponentFaq', question?: string | null, answer?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, testimonialsCollection?: { __typename?: 'PageServiceTestimonialsCollection', items: Array<{ __typename?: 'ComponentTestimonial', quote?: string | null, clientName?: string | null, clientPosition?: string | null, company?: string | null, testimonialDate?: any | null, sys: { __typename?: 'Sys', id: string }, clientImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null, featuredImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, serviceOverview?: { __typename?: 'ComponentServiceOverview', title?: string | null, description?: string | null, ctaText?: string | null, ctaLink?: string | null, sys: { __typename?: 'Sys', id: string }, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null, cta?: { __typename?: 'ComponentCta', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null };
+
 export type SeoFieldsFragment = { __typename?: 'ComponentSeo', name?: string | null, slug?: string | null, metaTitle?: string | null, metaDescription?: string | null, canonicalUrl?: string | null, openGraphTitle?: string | null, openGraphDescription?: string | null, robotsIndex?: boolean | null, robotsFollow?: boolean | null, schemaJsonLd?: string | null, schemaType?: string | null, twitterTitle?: string | null, twitterDescription?: string | null, twitterCardType?: string | null, openGraphImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null };
+
+export type ServiceOverViewFragment = { __typename?: 'ComponentServiceOverview', title?: string | null, description?: string | null, ctaText?: string | null, ctaLink?: string | null, sys: { __typename?: 'Sys', id: string }, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null };
+
+export type TestimonialFieldsFragment = { __typename?: 'ComponentTestimonial', quote?: string | null, clientName?: string | null, clientPosition?: string | null, company?: string | null, testimonialDate?: any | null, sys: { __typename?: 'Sys', id: string }, clientImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null };
 
 export type GetAppSettingsQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -5382,6 +5674,23 @@ export type GetAppSettingsQueryVariables = Exact<{
 
 export type GetAppSettingsQuery = { __typename?: 'Query', appSettingsCollection?: { __typename?: 'AppSettingsCollection', items: Array<{ __typename?: 'AppSettings', appTitle?: string | null, headerNavigation?: { __typename?: 'ComponentNavigation', itemsCollection?: { __typename?: 'ComponentNavigationItemsCollection', items: Array<{ __typename?: 'ComponentNavigationItem', name?: string | null, slug?: string | null, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null } | null, footerNavigation?: { __typename?: 'ComponentNavigation', itemsCollection?: { __typename?: 'ComponentNavigationItemsCollection', items: Array<{ __typename?: 'ComponentNavigationItem', name?: string | null, slug?: string | null, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null } | null } | null> } | null };
 
+export type GetBlogPostBySlugQueryVariables = Exact<{
+  locale: Scalars['String']['input'];
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetBlogPostBySlugQuery = { __typename?: 'Query', pageBlogPostCollection?: { __typename?: 'PageBlogPostCollection', items: Array<{ __typename?: 'PageBlogPost', slug?: string | null, title?: string | null, description?: string | null, sys: { __typename?: 'Sys', id: string }, seo?: { __typename?: 'ComponentSeo', name?: string | null, slug?: string | null, metaTitle?: string | null, metaDescription?: string | null, canonicalUrl?: string | null, openGraphTitle?: string | null, openGraphDescription?: string | null, robotsIndex?: boolean | null, robotsFollow?: boolean | null, schemaJsonLd?: string | null, schemaType?: string | null, twitterTitle?: string | null, twitterDescription?: string | null, twitterCardType?: string | null, openGraphImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null, featuredImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, content?: { __typename?: 'PageBlogPostContent', json: any, links: { __typename?: 'PageBlogPostContentLinks', entries: { __typename?: 'PageBlogPostContentEntries', block: Array<{ __typename?: 'AppSettings', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentAuthor', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentCta', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentFaq', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentFeature', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentHero', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentImageGallery', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentLink', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentNavigation', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentNavigationItem', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentProcess', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentSection', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentSeo', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentService', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentServiceOverview', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentStep', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentTestimonial', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'PageBlogPost', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'PageHome', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'PageService', sys: { __typename?: 'Sys', id: string } } | null> } } } | null, author?: { __typename?: 'ComponentAuthor', name?: string | null, bio?: string | null, sys: { __typename?: 'Sys', id: string }, profilePicture?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, socialLinksCollection?: { __typename?: 'ComponentAuthorSocialLinksCollection', items: Array<{ __typename?: 'ComponentLink', name?: string | null, href?: string | null, displayText?: string | null, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null } | null } | null> } | null };
+
+export type GetAllBlogPostsQueryVariables = Exact<{
+  locale: Scalars['String']['input'];
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type GetAllBlogPostsQuery = { __typename?: 'Query', pageBlogPostCollection?: { __typename?: 'PageBlogPostCollection', items: Array<{ __typename?: 'PageBlogPost', slug?: string | null, title?: string | null, description?: string | null, sys: { __typename?: 'Sys', id: string }, seo?: { __typename?: 'ComponentSeo', name?: string | null, slug?: string | null, metaTitle?: string | null, metaDescription?: string | null, canonicalUrl?: string | null, openGraphTitle?: string | null, openGraphDescription?: string | null, robotsIndex?: boolean | null, robotsFollow?: boolean | null, schemaJsonLd?: string | null, schemaType?: string | null, twitterTitle?: string | null, twitterDescription?: string | null, twitterCardType?: string | null, openGraphImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null, featuredImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, content?: { __typename?: 'PageBlogPostContent', json: any, links: { __typename?: 'PageBlogPostContentLinks', entries: { __typename?: 'PageBlogPostContentEntries', block: Array<{ __typename?: 'AppSettings', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentAuthor', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentCta', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentFaq', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentFeature', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentHero', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentImageGallery', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentLink', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentNavigation', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentNavigationItem', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentProcess', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentSection', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentSeo', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentService', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentServiceOverview', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentStep', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'ComponentTestimonial', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'PageBlogPost', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'PageHome', sys: { __typename?: 'Sys', id: string } } | { __typename?: 'PageService', sys: { __typename?: 'Sys', id: string } } | null> } } } | null, author?: { __typename?: 'ComponentAuthor', name?: string | null, bio?: string | null, sys: { __typename?: 'Sys', id: string }, profilePicture?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, socialLinksCollection?: { __typename?: 'ComponentAuthorSocialLinksCollection', items: Array<{ __typename?: 'ComponentLink', name?: string | null, href?: string | null, displayText?: string | null, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null } | null } | null> } | null };
+
 export type GetHomePageQueryVariables = Exact<{
   locale: Scalars['String']['input'];
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -5390,4 +5699,21 @@ export type GetHomePageQueryVariables = Exact<{
 
 export type GetHomePageQuery = { __typename?: 'Query', pageHomeCollection?: { __typename?: 'PageHomeCollection', items: Array<{ __typename?: 'PageHome', slug?: string | null, sys: { __typename?: 'Sys', id: string }, seo?: { __typename?: 'ComponentSeo', name?: string | null, slug?: string | null, metaTitle?: string | null, metaDescription?: string | null, canonicalUrl?: string | null, openGraphTitle?: string | null, openGraphDescription?: string | null, robotsIndex?: boolean | null, robotsFollow?: boolean | null, schemaJsonLd?: string | null, schemaType?: string | null, twitterTitle?: string | null, twitterDescription?: string | null, twitterCardType?: string | null, openGraphImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null, hero?: { __typename?: 'ComponentHero', heading?: string | null, subheading?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, callToAction?: { __typename?: 'ComponentCta', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null } | null } | null> } | null };
 
-export type HeroFieldsFragment = { __typename?: 'ComponentHero', heading?: string | null, subheading?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, callToAction?: { __typename?: 'ComponentCta', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null };
+export type GetAllServicesQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetAllServicesQuery = { __typename?: 'Query', pageServiceCollection?: { __typename?: 'PageServiceCollection', items: Array<{ __typename?: 'PageService', title?: string | null, description?: string | null, slug?: string | null, seo?: { __typename?: 'ComponentSeo', name?: string | null, slug?: string | null, metaTitle?: string | null, metaDescription?: string | null, canonicalUrl?: string | null, openGraphTitle?: string | null, openGraphDescription?: string | null, robotsIndex?: boolean | null, robotsFollow?: boolean | null, schemaJsonLd?: string | null, schemaType?: string | null, twitterTitle?: string | null, twitterDescription?: string | null, twitterCardType?: string | null, openGraphImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null, faqsCollection?: { __typename?: 'PageServiceFaqsCollection', items: Array<{ __typename?: 'ComponentFaq', question?: string | null, answer?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, testimonialsCollection?: { __typename?: 'PageServiceTestimonialsCollection', items: Array<{ __typename?: 'ComponentTestimonial', quote?: string | null, clientName?: string | null, clientPosition?: string | null, company?: string | null, testimonialDate?: any | null, sys: { __typename?: 'Sys', id: string }, clientImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null, featuredImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, serviceOverview?: { __typename?: 'ComponentServiceOverview', title?: string | null, description?: string | null, ctaText?: string | null, ctaLink?: string | null, sys: { __typename?: 'Sys', id: string }, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null, cta?: { __typename?: 'ComponentCta', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null } | null> } | null };
+
+export type GetServiceBySlugQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetServiceBySlugQuery = { __typename?: 'Query', pageServiceCollection?: { __typename?: 'PageServiceCollection', items: Array<{ __typename?: 'PageService', title?: string | null, description?: string | null, slug?: string | null, seo?: { __typename?: 'ComponentSeo', name?: string | null, slug?: string | null, metaTitle?: string | null, metaDescription?: string | null, canonicalUrl?: string | null, openGraphTitle?: string | null, openGraphDescription?: string | null, robotsIndex?: boolean | null, robotsFollow?: boolean | null, schemaJsonLd?: string | null, schemaType?: string | null, twitterTitle?: string | null, twitterDescription?: string | null, twitterCardType?: string | null, openGraphImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null, faqsCollection?: { __typename?: 'PageServiceFaqsCollection', items: Array<{ __typename?: 'ComponentFaq', question?: string | null, answer?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, testimonialsCollection?: { __typename?: 'PageServiceTestimonialsCollection', items: Array<{ __typename?: 'ComponentTestimonial', quote?: string | null, clientName?: string | null, clientPosition?: string | null, company?: string | null, testimonialDate?: any | null, sys: { __typename?: 'Sys', id: string }, clientImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null> } | null, featuredImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null, serviceOverview?: { __typename?: 'ComponentServiceOverview', title?: string | null, description?: string | null, ctaText?: string | null, ctaLink?: string | null, sys: { __typename?: 'Sys', id: string }, icon?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null, cta?: { __typename?: 'ComponentCta', heading?: string | null, subheading?: string | null, buttonText?: string | null, buttonLink?: string | null, sys: { __typename?: 'Sys', id: string }, backgroundImage?: { __typename?: 'Asset', url?: string | null, description?: string | null, title?: string | null, size?: number | null } | null } | null } | null> } | null };

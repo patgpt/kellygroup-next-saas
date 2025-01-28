@@ -1,0 +1,25 @@
+query getAllServices($locale: String, $preview: Boolean, $limit: Int) {
+  pageServiceCollection(limit: $limit, preview: $preview, locale: $locale) {
+    items {
+      ...ServicePageFields
+    }
+  }
+}
+
+query getServiceBySlug(
+  $locale: String
+  $preview: Boolean
+  $limit: Int
+  $slug: String
+) {
+  pageServiceCollection(
+    limit: $limit
+    preview: $preview
+    locale: $locale
+    where: { slug: $slug }
+  ) {
+    items {
+      ...ServicePageFields
+    }
+  }
+}

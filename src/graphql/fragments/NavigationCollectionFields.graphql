@@ -1,0 +1,9 @@
+fragment NavigationItemsCollectionFields on ComponentNavigationItemsCollection {
+  items {
+    name
+    slug
+    icon {
+      ...ImageFields
+    }
+  }
+}

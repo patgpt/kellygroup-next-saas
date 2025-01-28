@@ -1,0 +1,29 @@
+fragment BlogPostFields on PageBlogPost {
+  sys {
+    id
+  }
+  seo {
+    ...SeoFields
+  }
+  slug
+  title
+  description
+  featuredImage {
+    ...ImageFields
+  }
+  content {
+    json
+    links {
+      entries {
+        block {
+          sys {
+            id
+          }
+        }
+      }
+    }
+  }
+  author {
+    ...AuthorFields
+  }
+}

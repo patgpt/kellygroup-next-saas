@@ -1735,7 +1735,32 @@ input ComponentSeoFilter {
 
 type ComponentSeoLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageBlogPostCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageBlogPostCollectionOrder], preview: Boolean, skip: Int = 0): PageBlogPostCollection
   pageHomeCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageHomeCollectionOrder], preview: Boolean, skip: Int = 0): PageHomeCollection
+  pageServiceCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageServiceCollectionOrder], preview: Boolean, skip: Int = 0): PageServiceCollection
+}
+
+enum ComponentSeoLinkingCollectionsPageBlogPostCollectionOrder {
+  description_ASC
+  description_DESC
+  featured_ASC
+  featured_DESC
+  internalName_ASC
+  internalName_DESC
+  publishedDate_ASC
+  publishedDate_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 enum ComponentSeoLinkingCollectionsPageHomeCollectionOrder {
@@ -1751,6 +1776,23 @@ enum ComponentSeoLinkingCollectionsPageHomeCollectionOrder {
   sys_publishedAt_DESC
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
+}
+
+enum ComponentSeoLinkingCollectionsPageServiceCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 enum ComponentSeoOrder {
@@ -2455,7 +2497,7 @@ type PageBlogPost implements Entry & _Node {
   linkedFrom(allowedLocales: [String]): PageBlogPostLinkingCollections
   publishedDate(locale: String): DateTime
   relatedPostsCollection(limit: Int = 100, locale: String, order: [PageBlogPostRelatedPostsCollectionOrder], preview: Boolean, skip: Int = 0, where: PageBlogPostFilter): PageBlogPostRelatedPostsCollection
-  seo(locale: String, preview: Boolean): Entry
+  seo(locale: String, preview: Boolean, where: ComponentSeoFilter): ComponentSeo
   slug(locale: String): String
   sys: Sys!
   tags(locale: String): [String]
@@ -2549,6 +2591,7 @@ input PageBlogPostFilter {
   publishedDate_not_in: [DateTime]
   relatedPosts: cfPageBlogPostNestedFilter
   relatedPostsCollection_exists: Boolean
+  seo: cfComponentSeoNestedFilter
   seo_exists: Boolean
   slug: String
   slug_contains: String
@@ -2764,7 +2807,7 @@ type PageService implements Entry & _Node {
   featuredImage(locale: String, preview: Boolean): Asset
   internalName(locale: String): String
   linkedFrom(allowedLocales: [String]): PageServiceLinkingCollections
-  seo(locale: String, preview: Boolean): Entry
+  seo(locale: String, preview: Boolean, where: ComponentSeoFilter): ComponentSeo
   serviceOverview(locale: String, preview: Boolean, where: ComponentServiceOverviewFilter): ComponentServiceOverview
   slug(locale: String): String
   sys: Sys!
@@ -2824,6 +2867,7 @@ input PageServiceFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  seo: cfComponentSeoNestedFilter
   seo_exists: Boolean
   serviceOverview: cfComponentServiceOverviewNestedFilter
   serviceOverview_exists: Boolean

@@ -32,10 +32,10 @@ export default function LanguageSwitcher() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => onSelect("en")}>
+        <DropdownMenuItem onClick={() => onSelect("en-US")}>
           English
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => onSelect("fr")}>
+        <DropdownMenuItem onClick={() => onSelect("fr-CA")}>
           Français
         </DropdownMenuItem>
       </DropdownMenuContent>

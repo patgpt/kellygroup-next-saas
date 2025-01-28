@@ -9,7 +9,7 @@ export default async function middleware(request: NextRequest) {
   // Step 2: Create and call the next-intl middleware (example)
   const handleI18nRouting = createMiddleware({
     locales: routing.locales,
-    defaultLocale: "en",
+    defaultLocale: "en-US",
   });
   const response = handleI18nRouting(request);
   console.log(response.headers);
@@ -24,7 +24,7 @@ export const config = {
   matcher: [
     "/",
     // Match only internationalized pathnames
-    "/(fr|en)/:path*",
+    "/(fr-CA|en-US)/:path*",
     // - … if they start with `/api`, `/_next` or `/_vercel`
     // - … the ones containing a dot (e.g. `favicon.ico`)
     "/((?!api|_next|_vercel|.*\\..*).*)",

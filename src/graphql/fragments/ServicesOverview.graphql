@@ -1,0 +1,12 @@
+fragment ServiceOverView on ComponentServiceOverview {
+  sys {
+    id
+  }
+  title
+  description
+  icon {
+    ...ImageFields
+  }
+  ctaText
+  ctaLink
+}
