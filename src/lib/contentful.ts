@@ -1,15 +1,22 @@
-import { createClient } from "contentful";
+// Delete the REST client implementation and keep only:
 
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID!,
-  accessToken: process.env.CONTENTFUL_DELIVERY_TOKEN!,
-});
+// import { getSdk } from "../app/__generated__";
+import { getSdk } from "@/graphql/__generated__/sdk";
+import { GraphQLClient } from "graphql-request";
 
-const previewClient = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID!,
-  accessToken: process.env.CONTENTFUL_PREVIEW_TOKEN!,
-  host: "preview.contentful.com",
-});
+export const contentfulClient = (preview = false) =>
+  new GraphQLClient(
+    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
+    {
+      headers: {
+        Authorization: `Bearer ${
+          preview
+            ? process.env.CONTENTFUL_PREVIEW_TOKEN
+            : process.env.CONTENTFUL_DELIVERY_TOKEN
+        }`,
+      },
+    },
+  );
 
-export const getClient = (preview?: boolean) =>
-  preview ? previewClient : client;
+export const getContentful = (preview?: boolean) =>
+  getSdk(contentfulClient(preview));

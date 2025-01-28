@@ -1,0 +1,23 @@
+fragment AppSettingsFields on AppSettings {
+  appTitle
+  headerNavigation {
+    itemsCollection {
+      ...NavigationItemsCollectionFields
+    }
+  }
+  footerNavigation {
+    itemsCollection {
+      ...NavigationItemsCollectionFields
+    }
+  }
+}
+
+fragment NavigationItemsCollectionFields on ComponentNavigationItemsCollection {
+  items {
+    name
+    slug
+    icon {
+      ...ImageFields
+    }
+  }
+}

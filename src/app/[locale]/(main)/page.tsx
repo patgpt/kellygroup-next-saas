@@ -1,6 +1,7 @@
 import { HeroSection } from "@/components/Hero";
-import { Link } from "@/i18n/routing";
-import { getTranslations } from "next-intl/server";
+import { generatePageMetadata } from "@/lib/metadata";
+import type { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export default async function Home() {
   // { params }: PageParams

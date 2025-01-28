@@ -1,0 +1,7 @@
+query getAppSettings($locale: String, $preview: Boolean) {
+  appSettingsCollection(locale: $locale, preview: $preview, limit: 2) {
+    items {
+      ...AppSettingsFields
+    }
+  }
+}

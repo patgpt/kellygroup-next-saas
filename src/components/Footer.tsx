@@ -1,6 +1,7 @@
 import I18nNavigationLink from "@/components/I18nNavigationLink";
 
 function Footer() {
+  
   return (
     <footer className="bg-primary border-t-accent-foreground text-accent-foreground dark:bg-accent dark:text-accent-background mt-auto w-full border-t py-8">
       <div className="container mx-auto px-4">
