@@ -1,3 +1,11 @@
 fragment appSettings on AppSettings {
   appTitle
 }
+
+fragment AppSettingsCollection on AppSettingsCollection {
+  items {
+    ...appSettings
+  }
+}
+
+

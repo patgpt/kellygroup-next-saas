@@ -1,6 +1,7 @@
 // Delete the REST client implementation and keep only:
 
 // import { getSdk } from "../app/__generated__";
+import { getSdk } from "@/graphql/__generated__/sdk";
 import { GraphQLClient } from "graphql-request";
 
 export const contentfulClient = (preview = false) =>
@@ -17,5 +18,5 @@ export const contentfulClient = (preview = false) =>
     },
   );
 
-// export const getContentful = (preview?: boolean) =>
-//   getSdk(contentfulClient(preview));
+export const getContentful = (preview?: boolean) =>
+  getSdk(contentfulClient(preview));

@@ -1,7 +1,7 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config({});
 
 const config: CodegenConfig = {
   schema: [
@@ -14,14 +14,16 @@ const config: CodegenConfig = {
         },
     },
   ],
+
   documents: [
     "src/graphql/**/*.{graphql,gql,ts}",
     "!src/graphql/__generated__/**/*", // Exclude generated files
   ],
   watch: true,
-
+    
   overwrite: true,
   generates: {
+
     // Generate the GraphQL schema as an SDL file
     "src/graphql/__generated__/schema.graphql": {
       plugins: ["schema-ast"],

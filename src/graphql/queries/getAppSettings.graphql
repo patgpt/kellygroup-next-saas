@@ -3,5 +3,6 @@ query getAppSettings($locale: String, $preview: Boolean) {
     items {
       ...appSettings
     }
+        
   }
 }
