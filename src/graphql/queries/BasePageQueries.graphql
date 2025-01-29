@@ -1,0 +1,33 @@
+query getBasePageBy(
+  $locale: String
+  $preview: Boolean
+  $limit: Int
+  $slug: String
+) {
+  pageBaseCollection(
+    limit: $limit
+    preview: $preview
+    locale: $locale
+    where: { slug: $slug }
+  ) {
+    items {
+      sys {
+        id
+      }
+      seo {
+        ...SeoFields
+      }
+      slug
+      title
+      content {
+        json
+      }
+      featuredImage {
+        ...ImageFields
+      }
+      callToAction {
+        ...CTAFields
+      }
+    }
+  }
+}

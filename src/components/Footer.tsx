@@ -42,93 +42,59 @@ async function Footer() {
             {/* Site Navigation */}
             <div>
               <h3 className="mb-4 text-sm font-semibold uppercase">
-                Navigation
+                {settings.siteNavigationTitle}
               </h3>
               <ul className="space-y-2">
-                <li>
-                  <I18nNavigationLink
-                    href="/"
-                    className="hover:text-accent-foreground/80 text-sm"
-                  >
-                    Home
-                  </I18nNavigationLink>
-                </li>
-                <li>
-                  <I18nNavigationLink
-                    href="/about"
-                    className="hover:text-accent-foreground/80 text-sm"
-                  >
-                    About
-                  </I18nNavigationLink>
-                </li>
-                <li>
-                  <I18nNavigationLink
-                    href="/services"
-                    className="hover:text-accent-foreground/80 text-sm"
-                  >
-                    Services
-                  </I18nNavigationLink>
-                </li>
-                <li>
-                  <I18nNavigationLink
-                    href="/contact"
-                    className="hover:text-accent-foreground/80 text-sm"
-                  >
-                    Contact
-                  </I18nNavigationLink>
-                </li>
+                {settings.siteNavigation?.itemsCollection?.items.map((item) => (
+                  <li key={item?.sys?.id}>
+                    <I18nNavigationLink
+                      href={item?.slug!}
+                      className="hover:text-accent-foreground/80 text-sm"
+                    >
+                      {item?.name}
+                    </I18nNavigationLink>
+                  </li>
+                ))}
               </ul>
             </div>
             {/* Services Navigation */}
             <div>
-              <h3 className="mb-4 text-sm font-semibold uppercase">Services</h3>
+              <h3 className="mb-4 text-sm font-semibold uppercase">
+                {settings.servicesNavigationTitle}
+              </h3>
               <ul className="space-y-2">
-                <li>
-                  <I18nNavigationLink
-                    href="/services/web-design"
-                    className="hover:text-accent-foreground/80 text-sm"
-                  >
-                    Web Design
-                  </I18nNavigationLink>
-                </li>
-                <li>
-                  <I18nNavigationLink
-                    href="/services/branding"
-                    className="hover:text-accent-foreground/80 text-sm"
-                  >
-                    Branding
-                  </I18nNavigationLink>
-                </li>
-                <li>
-                  <I18nNavigationLink
-                    href="/services/consulting"
-                    className="hover:text-accent-foreground/80 text-sm"
-                  >
-                    Consulting
-                  </I18nNavigationLink>
-                </li>
+                {settings.servicesNavigation?.itemsCollection?.items.map(
+                  (item) => (
+                    <li key={item?.sys?.id}>
+                      <I18nNavigationLink
+                        href={item?.slug!}
+                        className="hover:text-accent-foreground/80 text-sm"
+                      >
+                        {item?.name}
+                      </I18nNavigationLink>
+                    </li>
+                  ),
+                )}
               </ul>
             </div>
             {/* Legal Navigation */}
             <div>
-              <h3 className="mb-4 text-sm font-semibold uppercase">Legal</h3>
+              <h3 className="mb-4 text-sm font-semibold uppercase">
+                {settings.legalNavigationTitle}
+              </h3>
               <ul className="space-y-2">
-                <li>
-                  <I18nNavigationLink
-                    href="/privacy-policy"
-                    className="hover:text-accent-foreground/80 text-sm"
-                  >
-                    Privacy Policy
-                  </I18nNavigationLink>
-                </li>
-                <li>
-                  <I18nNavigationLink
-                    href="/terms-of-service"
-                    className="hover:text-accent-foreground/80 text-sm"
-                  >
-                    Terms of Service
-                  </I18nNavigationLink>
-                </li>
+                {settings.legalNavigation?.itemsCollection?.items.map(
+                  (item) => (
+                    <li key={item?.sys?.id}>
+                      <I18nNavigationLink
+                        href={item?.slug!}
+                        className="hover:text-accent-foreground/80 text-sm"
+                      >
+                        {item?.name}
+                      </I18nNavigationLink>
+                    </li>
+                  ),
+                )}
               </ul>
             </div>
           </div>
@@ -136,7 +102,7 @@ async function Footer() {
       </div>
       {/* Footer copyright Text */}
       <p className="container mx-auto mt-8 px-4 text-center text-sm">
-        &copy; {new Date().getFullYear()} KellyGroup. All rights reserved.
+        {settings.copyrightText}
       </p>
     </footer>
   );

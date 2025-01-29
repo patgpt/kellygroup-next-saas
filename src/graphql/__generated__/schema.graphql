@@ -232,10 +232,16 @@ type AppSettings implements Entry & _Node {
   _id: ID!
   appTitle(locale: String): String
   contentfulMetadata: ContentfulMetadata!
-  footerNavigation(locale: String, preview: Boolean, where: ComponentNavigationFilter): ComponentNavigation
+  copyrightText(locale: String): String
   headerNavigation(locale: String, preview: Boolean, where: ComponentNavigationFilter): ComponentNavigation
   internalId(locale: String): String
+  legalNavigation(locale: String, preview: Boolean, where: ComponentNavigationFilter): ComponentNavigation
+  legalNavigationTitle(locale: String): String
   linkedFrom(allowedLocales: [String]): AppSettingsLinkingCollections
+  servicesNavigation(locale: String, preview: Boolean, where: ComponentNavigationFilter): ComponentNavigation
+  servicesNavigationTitle(locale: String): String
+  siteNavigation(locale: String, preview: Boolean, where: ComponentNavigationFilter): ComponentNavigation
+  siteNavigationTitle(locale: String): String
   sys: Sys!
 }
 
@@ -257,8 +263,13 @@ input AppSettingsFilter {
   appTitle_not_contains: String
   appTitle_not_in: [String]
   contentfulMetadata: ContentfulMetadataFilter
-  footerNavigation: cfComponentNavigationNestedFilter
-  footerNavigation_exists: Boolean
+  copyrightText: String
+  copyrightText_contains: String
+  copyrightText_exists: Boolean
+  copyrightText_in: [String]
+  copyrightText_not: String
+  copyrightText_not_contains: String
+  copyrightText_not_in: [String]
   headerNavigation: cfComponentNavigationNestedFilter
   headerNavigation_exists: Boolean
   internalId: String
@@ -268,6 +279,33 @@ input AppSettingsFilter {
   internalId_not: String
   internalId_not_contains: String
   internalId_not_in: [String]
+  legalNavigation: cfComponentNavigationNestedFilter
+  legalNavigationTitle: String
+  legalNavigationTitle_contains: String
+  legalNavigationTitle_exists: Boolean
+  legalNavigationTitle_in: [String]
+  legalNavigationTitle_not: String
+  legalNavigationTitle_not_contains: String
+  legalNavigationTitle_not_in: [String]
+  legalNavigation_exists: Boolean
+  servicesNavigation: cfComponentNavigationNestedFilter
+  servicesNavigationTitle: String
+  servicesNavigationTitle_contains: String
+  servicesNavigationTitle_exists: Boolean
+  servicesNavigationTitle_in: [String]
+  servicesNavigationTitle_not: String
+  servicesNavigationTitle_not_contains: String
+  servicesNavigationTitle_not_in: [String]
+  servicesNavigation_exists: Boolean
+  siteNavigation: cfComponentNavigationNestedFilter
+  siteNavigationTitle: String
+  siteNavigationTitle_contains: String
+  siteNavigationTitle_exists: Boolean
+  siteNavigationTitle_in: [String]
+  siteNavigationTitle_not: String
+  siteNavigationTitle_not_contains: String
+  siteNavigationTitle_not_in: [String]
+  siteNavigation_exists: Boolean
   sys: SysFilter
 }
 
@@ -278,8 +316,16 @@ type AppSettingsLinkingCollections {
 enum AppSettingsOrder {
   appTitle_ASC
   appTitle_DESC
+  copyrightText_ASC
+  copyrightText_DESC
   internalId_ASC
   internalId_DESC
+  legalNavigationTitle_ASC
+  legalNavigationTitle_DESC
+  servicesNavigationTitle_ASC
+  servicesNavigationTitle_DESC
+  siteNavigationTitle_ASC
+  siteNavigationTitle_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -396,6 +442,7 @@ type AssetLinkingCollections {
   componentStepCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentStepCollection
   componentTestimonialCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentTestimonialCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageBaseCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageBaseCollection
   pageBlogPostCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageBlogPostCollection
   pageServiceCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageServiceCollection
 }
@@ -615,6 +662,7 @@ type ComponentCtaLinkingCollections {
   componentHeroCollection(limit: Int = 100, locale: String, order: [ComponentCtaLinkingCollectionsComponentHeroCollectionOrder], preview: Boolean, skip: Int = 0): ComponentHeroCollection
   componentSectionCollection(limit: Int = 100, locale: String, order: [ComponentCtaLinkingCollectionsComponentSectionCollectionOrder], preview: Boolean, skip: Int = 0): ComponentSectionCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageBaseCollection(limit: Int = 100, locale: String, order: [ComponentCtaLinkingCollectionsPageBaseCollectionOrder], preview: Boolean, skip: Int = 0): PageBaseCollection
   pageBlogPostCollection(limit: Int = 100, locale: String, order: [ComponentCtaLinkingCollectionsPageBlogPostCollectionOrder], preview: Boolean, skip: Int = 0): PageBlogPostCollection
   pageHomeCollection(limit: Int = 100, locale: String, order: [ComponentCtaLinkingCollectionsPageHomeCollectionOrder], preview: Boolean, skip: Int = 0): PageHomeCollection
   pageServiceCollection(limit: Int = 100, locale: String, order: [ComponentCtaLinkingCollectionsPageServiceCollectionOrder], preview: Boolean, skip: Int = 0): PageServiceCollection
@@ -642,6 +690,23 @@ enum ComponentCtaLinkingCollectionsComponentSectionCollectionOrder {
   internalName_DESC
   subtitle_ASC
   subtitle_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+enum ComponentCtaLinkingCollectionsPageBaseCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  slug_ASC
+  slug_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1263,6 +1328,7 @@ type ComponentNavigationItem implements Entry & _Node {
   linkedFrom(allowedLocales: [String]): ComponentNavigationItemLinkingCollections
   name(locale: String): String
   slug(locale: String): String
+  submenu(locale: String, preview: Boolean, where: ComponentNavigationFilter): ComponentNavigation
   sys: Sys!
 }
 
@@ -1299,6 +1365,8 @@ input ComponentNavigationItemFilter {
   slug_not: String
   slug_not_contains: String
   slug_not_in: [String]
+  submenu: cfComponentNavigationNestedFilter
+  submenu_exists: Boolean
   sys: SysFilter
 }
 
@@ -1365,14 +1433,40 @@ enum ComponentNavigationItemsCollectionOrder {
 
 type ComponentNavigationLinkingCollections {
   appSettingsCollection(limit: Int = 100, locale: String, order: [ComponentNavigationLinkingCollectionsAppSettingsCollectionOrder], preview: Boolean, skip: Int = 0): AppSettingsCollection
+  componentNavigationItemCollection(limit: Int = 100, locale: String, order: [ComponentNavigationLinkingCollectionsComponentNavigationItemCollectionOrder], preview: Boolean, skip: Int = 0): ComponentNavigationItemCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
 }
 
 enum ComponentNavigationLinkingCollectionsAppSettingsCollectionOrder {
   appTitle_ASC
   appTitle_DESC
+  copyrightText_ASC
+  copyrightText_DESC
   internalId_ASC
   internalId_DESC
+  legalNavigationTitle_ASC
+  legalNavigationTitle_DESC
+  servicesNavigationTitle_ASC
+  servicesNavigationTitle_DESC
+  siteNavigationTitle_ASC
+  siteNavigationTitle_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum ComponentNavigationLinkingCollectionsComponentNavigationItemCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  name_ASC
+  name_DESC
+  slug_ASC
+  slug_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1584,6 +1678,24 @@ input ComponentSectionFilter {
 
 type ComponentSectionLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageBaseCollection(limit: Int = 100, locale: String, order: [ComponentSectionLinkingCollectionsPageBaseCollectionOrder], preview: Boolean, skip: Int = 0): PageBaseCollection
+}
+
+enum ComponentSectionLinkingCollectionsPageBaseCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 enum ComponentSectionOrder {
@@ -1735,9 +1847,27 @@ input ComponentSeoFilter {
 
 type ComponentSeoLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageBaseCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageBaseCollectionOrder], preview: Boolean, skip: Int = 0): PageBaseCollection
   pageBlogPostCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageBlogPostCollectionOrder], preview: Boolean, skip: Int = 0): PageBlogPostCollection
   pageHomeCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageHomeCollectionOrder], preview: Boolean, skip: Int = 0): PageHomeCollection
   pageServiceCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageServiceCollectionOrder], preview: Boolean, skip: Int = 0): PageServiceCollection
+}
+
+enum ComponentSeoLinkingCollectionsPageBaseCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 enum ComponentSeoLinkingCollectionsPageBlogPostCollectionOrder {
@@ -2482,6 +2612,154 @@ The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://
 scalar JSON
 
 """
+A Generic Page for use throughout the site [See type definition](https://app.contentful.com/spaces/fs5tsm2181s6/content_types/pageBase)
+"""
+type PageBase implements Entry & _Node {
+  _id: ID!
+  callToAction(locale: String, preview: Boolean, where: ComponentCtaFilter): ComponentCta
+  componentSectionCollection(limit: Int = 100, locale: String, order: [PageBaseComponentSectionCollectionOrder], preview: Boolean, skip: Int = 0, where: ComponentSectionFilter): PageBaseComponentSectionCollection
+  content(locale: String): PageBaseContent
+  contentfulMetadata: ContentfulMetadata!
+  featuredImage(locale: String, preview: Boolean): Asset
+  internalName(locale: String): String
+  linkedFrom(allowedLocales: [String]): PageBaseLinkingCollections
+  seo(locale: String, preview: Boolean, where: ComponentSeoFilter): ComponentSeo
+  slug(locale: String): String
+  sys: Sys!
+  title(locale: String): String
+}
+
+type PageBaseCollection {
+  items: [PageBase]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+type PageBaseComponentSectionCollection {
+  items: [ComponentSection]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum PageBaseComponentSectionCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  subtitle_ASC
+  subtitle_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+type PageBaseContent {
+  json: JSON!
+  links: PageBaseContentLinks!
+}
+
+type PageBaseContentAssets {
+  block: [Asset]!
+  hyperlink: [Asset]!
+}
+
+type PageBaseContentEntries {
+  block: [Entry]!
+  hyperlink: [Entry]!
+  inline: [Entry]!
+}
+
+type PageBaseContentLinks {
+  assets: PageBaseContentAssets!
+  entries: PageBaseContentEntries!
+  resources: PageBaseContentResources!
+}
+
+type PageBaseContentResources {
+  block: [PageBaseContentResourcesBlock!]!
+  hyperlink: [PageBaseContentResourcesHyperlink!]!
+  inline: [PageBaseContentResourcesInline!]!
+}
+
+type PageBaseContentResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageBaseContentResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageBaseContentResourcesInline implements ResourceLink {
+  sys: ResourceSys!
+}
+
+input PageBaseFilter {
+  AND: [PageBaseFilter]
+  OR: [PageBaseFilter]
+  callToAction: cfComponentCtaNestedFilter
+  callToAction_exists: Boolean
+  componentSection: cfComponentSectionNestedFilter
+  componentSectionCollection_exists: Boolean
+  content_contains: String
+  content_exists: Boolean
+  content_not_contains: String
+  contentfulMetadata: ContentfulMetadataFilter
+  featuredImage_exists: Boolean
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  seo: cfComponentSeoNestedFilter
+  seo_exists: Boolean
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+type PageBaseLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum PageBaseOrder {
+  internalName_ASC
+  internalName_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+"""
 A content type for individual blog posts. [See type definition](https://app.contentful.com/spaces/fs5tsm2181s6/content_types/PageBlogPost)
 """
 type PageBlogPost implements Entry & _Node {
@@ -2983,6 +3261,8 @@ type Query {
   componentTestimonial(id: String!, locale: String, preview: Boolean): ComponentTestimonial
   componentTestimonialCollection(limit: Int = 100, locale: String, order: [ComponentTestimonialOrder], preview: Boolean, skip: Int = 0, where: ComponentTestimonialFilter): ComponentTestimonialCollection
   entryCollection(limit: Int = 100, locale: String, order: [EntryOrder], preview: Boolean, skip: Int = 0, where: EntryFilter): EntryCollection
+  pageBase(id: String!, locale: String, preview: Boolean): PageBase
+  pageBaseCollection(limit: Int = 100, locale: String, order: [PageBaseOrder], preview: Boolean, skip: Int = 0, where: PageBaseFilter): PageBaseCollection
   pageBlogPost(id: String!, locale: String, preview: Boolean): PageBlogPost
   pageBlogPostCollection(limit: Int = 100, locale: String, order: [PageBlogPostOrder], preview: Boolean, skip: Int = 0, where: PageBlogPostFilter): PageBlogPostCollection
   pageHome(id: String!, locale: String, preview: Boolean): PageHome
@@ -3299,6 +3579,7 @@ input cfComponentNavigationItemNestedFilter {
   slug_not: String
   slug_not_contains: String
   slug_not_in: [String]
+  submenu_exists: Boolean
   sys: SysFilter
 }
 
@@ -3343,6 +3624,36 @@ input cfComponentProcessNestedFilter {
   internalName_not_contains: String
   internalName_not_in: [String]
   stepsCollection_exists: Boolean
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+input cfComponentSectionNestedFilter {
+  AND: [cfComponentSectionNestedFilter]
+  OR: [cfComponentSectionNestedFilter]
+  backgroundImage_exists: Boolean
+  componentsCollection_exists: Boolean
+  contentfulMetadata: ContentfulMetadataFilter
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  subtitle: String
+  subtitle_contains: String
+  subtitle_exists: Boolean
+  subtitle_in: [String]
+  subtitle_not: String
+  subtitle_not_contains: String
+  subtitle_not_in: [String]
   sys: SysFilter
   title: String
   title_contains: String

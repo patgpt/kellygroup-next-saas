@@ -1,0 +1,11 @@
+fragment NavigationMenuFields on ComponentNavigation {
+  itemsCollection {
+    items {
+      name
+      slug
+      icon {
+        ...ImageFields
+      }
+    }
+  }
+}

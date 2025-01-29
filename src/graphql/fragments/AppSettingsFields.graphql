@@ -1,14 +1,20 @@
-fragment AppSettingsFields on AppSettings {
-  appTitle
-  headerNavigation {
-    itemsCollection {
-      ...NavigationItemsCollectionFields
+fragment AppSettingsFields on AppSettingsCollection {
+  items {
+    appTitle
+    headerNavigation {
+      ...NavigationMenuFields
     }
-  }
-  footerNavigation {
-    itemsCollection {
-      ...NavigationItemsCollectionFields
+    legalNavigationTitle
+    legalNavigation {
+      ...NavigationMenuFields
     }
+    servicesNavigation {
+      ...NavigationMenuFields
+    }
+    siteNavigationTitle
+    siteNavigation {
+      ...NavigationMenuFields
+    }
+    copyrightText
   }
 }
-
