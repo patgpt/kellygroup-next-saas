@@ -10,6 +10,7 @@ import { routing } from "../../i18n/routing";
 import "./globals.css";
 import NavigationBar from "@/components/NavigationBar";
 import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -51,6 +52,7 @@ export default async function RootLayout({
           >
             <NavigationBar />
             {children}
+            <Toaster />
             <Footer />
           </ThemeProvider>
         </NextIntlClientProvider>
