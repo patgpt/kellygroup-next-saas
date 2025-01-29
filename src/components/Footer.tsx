@@ -1,9 +1,16 @@
 import I18nNavigationLink from "@/components/I18nNavigationLink";
+import type { AppSettings } from "@/graphql/__generated__/sdk";
 import { getContentful } from "@/lib/contentful";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 
-async function Footer() {
+/**
+ * Fetches application settings from Contentful.
+ *
+ * @returns {Promise<AppSettings>} The application settings.
+ * @throws Will throw an error if fetching settings fails.
+ */
+async function getData() {
   const { isEnabled: preview } = await draftMode();
   const client = getContentful(preview);
   const result = await client.getAppSettings();
@@ -12,7 +19,12 @@ async function Footer() {
     console.error(result.errors, "Error fetching settings");
     return notFound();
   }
+  return settings as AppSettings;
+}
 
+async function Footer() {
+  const settings = await getData();
+  if (!settings) return notFound();
   return (
     <footer className="bg-primary border-t-accent-foreground text-accent-foreground dark:bg-accent dark:text-accent-background mt-auto w-full border-t py-8">
       <div className="container mx-auto px-4">
@@ -27,6 +39,7 @@ async function Footer() {
 
           {/* Site Navigation Links */}
           <div className="grid grid-cols-2 gap-4 md:col-span-3 md:grid-cols-3">
+            {/* Site Navigation */}
             <div>
               <h3 className="mb-4 text-sm font-semibold uppercase">
                 Navigation
@@ -66,7 +79,7 @@ async function Footer() {
                 </li>
               </ul>
             </div>
-
+            {/* Services Navigation */}
             <div>
               <h3 className="mb-4 text-sm font-semibold uppercase">Services</h3>
               <ul className="space-y-2">
@@ -96,7 +109,7 @@ async function Footer() {
                 </li>
               </ul>
             </div>
-
+            {/* Legal Navigation */}
             <div>
               <h3 className="mb-4 text-sm font-semibold uppercase">Legal</h3>
               <ul className="space-y-2">
@@ -121,6 +134,7 @@ async function Footer() {
           </div>
         </div>
       </div>
+      {/* Footer copyright Text */}
       <p className="container mx-auto mt-8 px-4 text-center text-sm">
         &copy; {new Date().getFullYear()} KellyGroup. All rights reserved.
       </p>
