@@ -129,7 +129,7 @@ export default function ContactForm() {
               </FormItem>
             )}
           />
-          <FormField
+          {/* <FormField
             control={form.control}
             name="subject"
             disabled={isSubmitting}
@@ -137,7 +137,7 @@ export default function ContactForm() {
               <FormItem>
                 <FormLabel className="mb-4 text-2xl">Subject</FormLabel>
                 <FormControl className="my-4 shadow-sm hover:shadow-md">
-                  {/* <Select {...field} onValueChange={field.onChange}>
+                  <Select {...field} onValueChange={field.onChange}>
                     <SelectTrigger className="w-[180px]">
                       <SelectValue placeholder="Subject" />
                     </SelectTrigger>
@@ -150,7 +150,7 @@ export default function ContactForm() {
                         Game Development
                       </SelectItem>
                     </SelectContent>
-                  </Select> */}
+                  </Select>
                 </FormControl>
                 <FormDescription className="text-3xl">
                   What are you inquiring about?
@@ -158,7 +158,7 @@ export default function ContactForm() {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
           {form.formState.errors.root && (
             <p className="text-destructive text-ease-in-out my-2 py-2 transition-all delay-200">
