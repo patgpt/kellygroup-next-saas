@@ -40,9 +40,9 @@ const Page = async ({ params }: PageParams) => {
       preview: preview,
       slug: slug,
     })
-    .then((res) => res.data.pageBlogPostCollection?.items || {});
+    .then((res) => res.data.pageBlogPostCollection?.items || []);
 
-  const post = pages[0];
+  const post = pages[0] as PageBlogPost | undefined;
   if (!post) {
     return notFound();
   }
