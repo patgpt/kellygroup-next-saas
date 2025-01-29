@@ -13,8 +13,8 @@ export const formSchema = z.object({
     .string()
     .min(10, { message: "Message is too short" })
     .max(500, { message: "Message is too long" }),
-  subject: z.object({
-    label: z.string(),
-    value: z.string(),
-  }),
+  // subject: z.object({
+  //   label: z.string(),
+  //   value: z.string(),
+  // }),
 });

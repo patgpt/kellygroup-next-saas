@@ -1,7 +1,18 @@
 import I18nNavigationLink from "@/components/I18nNavigationLink";
+import { getContentful } from "@/lib/contentful";
+import { draftMode } from "next/headers";
+import { notFound } from "next/navigation";
 
-function Footer() {
-  
+async function Footer() {
+  const { isEnabled: preview } = await draftMode();
+  const client = getContentful(preview);
+  const result = await client.getAppSettings();
+  const settings = result?.data?.appSettingsCollection?.items[0];
+  if (result.errors || !settings) {
+    console.error(result.errors, "Error fetching settings");
+    return notFound();
+  }
+
   return (
     <footer className="bg-primary border-t-accent-foreground text-accent-foreground dark:bg-accent dark:text-accent-background mt-auto w-full border-t py-8">
       <div className="container mx-auto px-4">
@@ -10,7 +21,7 @@ function Footer() {
           {/* Branding  */}
           <div className="space-y-4">
             <I18nNavigationLink href="/" className="text-lg font-bold">
-              KellyGroup
+              {settings.appTitle}
             </I18nNavigationLink>
           </div>
 
