@@ -33,6 +33,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "tailwind.config.js"
-  ],
+, "contentful/entries/createFAQEntries.js"  ],
   "exclude": ["node_modules"]
 }

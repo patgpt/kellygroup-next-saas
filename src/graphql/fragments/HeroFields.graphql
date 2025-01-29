@@ -1,0 +1,13 @@
+fragment HeroFields on ComponentHero {
+  sys {
+    id
+  }
+  heading
+  subheading
+  backgroundImage {
+    ...ImageFields
+  }
+  callToAction {
+    ...CTAFields
+  }
+}

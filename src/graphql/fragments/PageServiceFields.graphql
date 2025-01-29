@@ -1,0 +1,27 @@
+fragment ServicePageFields on PageService {
+  title
+  seo {
+    ...SeoFields
+  }
+  description
+  faqsCollection {
+    items {
+      ...FaqFields
+    }
+  }
+  testimonialsCollection {
+    items {
+      ...TestimonialFields
+    }
+  }
+  slug
+  featuredImage {
+    ...ImageFields
+  }
+  serviceOverview {
+    ...ServiceOverView
+  }
+  cta {
+    ...CTAFields
+  }
+}

@@ -12,12 +12,3 @@ fragment AppSettingsFields on AppSettings {
   }
 }
 
-fragment NavigationItemsCollectionFields on ComponentNavigationItemsCollection {
-  items {
-    name
-    slug
-    icon {
-      ...ImageFields
-    }
-  }
-}

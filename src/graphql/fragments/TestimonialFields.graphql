@@ -1,0 +1,13 @@
+fragment TestimonialFields on ComponentTestimonial {
+  sys {
+    id
+  }
+  quote
+  clientName
+  clientPosition
+  clientImage {
+    ...ImageFields
+  }
+  company
+  testimonialDate
+}
