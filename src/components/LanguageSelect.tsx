@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
-import { useRouter } from "@/i18n/routing";
+import { usePathname, useRouter } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,18 +11,28 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useParams } from "next/navigation";
 
 export default function LanguageSwitcher() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const t = useTranslations("UI");
-
+  const pathname = usePathname();
+  const params = useParams();
   function onSelect(locale: string) {
     startTransition(() => {
-      router.replace(locale);
+      router.replace(
+        {
+          pathname: pathname,
+          query: params,
+        },
+        {
+          locale,
+          scroll: false,
+        },
+      );
     });
   }
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

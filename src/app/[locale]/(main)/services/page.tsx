@@ -16,8 +16,12 @@ const getServices = async ({
     const response = await client.getAllServices({
       locale,
       preview,
+      limit: 10,
     });
-
+    if (response.errors) {
+      console.error("Failed to fetch services:", response.errors);
+      throw new Error("Failed to fetch services");
+    }
     return response.data.pageServiceCollection?.items ?? [];
   } catch (error) {
     console.error("Failed to fetch services:", error);
@@ -29,6 +33,7 @@ const Page = async ({ params }: PageParams) => {
   const { locale } = await params;
   const { isEnabled: preview } = await draftMode();
   const services = await getServices({ locale, preview });
+
   return (
     <div>
       Hello world {locale}
