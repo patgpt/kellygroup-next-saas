@@ -19,7 +19,7 @@ const config: CodegenConfig = {
     "src/graphql/**/*.{graphql,gql,ts}",
     "!src/graphql/__generated__/**/*", // Exclude generated files
   ],
-  
+
   watch: true,
   overwrite: true,
   generates: {
@@ -38,7 +38,20 @@ const config: CodegenConfig = {
     './src/gql/': {
       preset: 'client',
       presetConfig: {
-        fragmentMasking: false
+        fragmentMasking: false,
+        exposeQueryKeys: true,
+        exposeMutationKeys: true,
+        exposeFetcher: true,
+        pureMagicComment: true,
+        dedupeFragments: true,
+        skipTypename: true, 
+      },
+    },
+    // Generates a file that can be used to generate the types for the react-query sdk
+    './generates.ts': {
+      plugins: ['typescript', 'typescript-operations', 'typescript-react-query'],
+      config: {
+        fetcher: 'graphql-request'
       },
     },
     // Generate a minified introspection file (optional)
