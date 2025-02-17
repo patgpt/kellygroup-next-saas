@@ -14,38 +14,33 @@ const config: CodegenConfig = {
         },
     },
   ],
-
+  hooks: { afterAllFileWrite: ["eslint --fix"] },
   documents: [
     "src/graphql/**/*.{graphql,gql,ts}",
     "!src/graphql/__generated__/**/*", // Exclude generated files
   ],
+  
   watch: true,
   overwrite: true,
   generates: {
+
     // Generate the GraphQL schema as an SDL file
-    "src/graphql/__generated__/schema.graphql": {
-      plugins: ["schema-ast"],
-      overwrite: true,
-      config: {
-        includeIntrospectionTypes: true, // Include introspection types
-        commentDescriptions: true, // Add descriptions as comments
+    'src/graphql.schema.graphql': {
+       plugins: ['schema-ast'],
+       config: {
+         includeDirectives: true,
+         includeIntrospectionTypes: true,
+         commentDescriptions: true,
+       },
+     },
+ 
+    // Generate client-side operations and type-safe SDK for react-query
+    './src/gql/': {
+      preset: 'client',
+      presetConfig: {
+        fragmentMasking: false
       },
     },
-
-    // Generate client-side operations and type-safe SDK
-    "src/graphql/__generated__/sdk.ts": {
-      plugins: [
-        "typescript",
-        "typescript-graphql-request",
-        "typescript-operations",
-      ],
-      config: {
-        rawRequest: true,
-        pureMagicComment: true,
-      },
-      overwrite: true,
-    },
-
     // Generate a minified introspection file (optional)
     "src/graphql/__generated__/introspection.json": {
       plugins: ["introspection"],
