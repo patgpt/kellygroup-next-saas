@@ -23,7 +23,7 @@ const { handleRequest } = createYoga<NextContext>({
   graphqlEndpoint: '/api/graphql',
  
   // Yoga needs to know how to create a valid Next response
-  fetchAPI: { Response }
+  fetchAPI: { Response, fetch: fetch }
 })
  
 export { handleRequest as GET, handleRequest as OPTIONS, handleRequest as POST }
