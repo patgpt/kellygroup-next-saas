@@ -12,6 +12,7 @@ export const routing = defineRouting({
   // Used when no locale matches
   defaultLocale: "en-US",
   localeDetection: true,
+  localeCookie: true,
   // The top-level segment of the URL that will be used to determine the locale
   localePrefix: "always",
 });

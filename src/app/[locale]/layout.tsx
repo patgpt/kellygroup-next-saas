@@ -2,12 +2,14 @@ import Footer from "@/components/Footer";
 import NavigationBar from "@/components/NavigationBar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
+import { graphql } from "@/gql";
+import { AppSettingsCollectionDocument } from "@/gql/graphql";
 import { fontMono, fontSans } from "@/lib/fonts";
 import { sdk } from "@/lib/query-client";
 import { cn } from "@/lib/utils";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import request, { gql } from "graphql-request";
+import request from "graphql-request";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
@@ -26,21 +28,28 @@ interface RootLayoutProps {
   children: React.ReactNode;
   params: Promise<{ locale: Locale }>;
 }
-
-interface AppSettingsQuery {
-  sys: {
-    id: string;
-  };
+interface AppSettingsCollectionQuery {
+  items: {
+    sys: {
+      id: string;
+    };
+  }[];
 }
-const appSettingsQuery = gql/* GraphQL */ `
-  {
-    appSettings(limit: 1) {
-      sys {
-        id
+const appSettingsCollectionQuery = graphql(/* GraphQL */ `
+  query appSettingsCollection(
+    $locale: String!
+    $preview: Boolean!
+    $limit: Int!
+  ) {
+    appSettingsCollection(locale: $locale, preview: $preview, limit: $limit) {
+      items {
+        sys {
+          id
+        }
       }
     }
   }
-`;
+`);
 
 export default async function RootLayout({
   children,
@@ -50,10 +59,23 @@ export default async function RootLayout({
   const messages = await getMessages();
   // Enable static rendering
   setRequestLocale(locale);
-  const { sys } = await request<AppSettingsQuery>(
-    process.env.CONTENTFUL_GRAPHQL_ENDPOINT!,
-    appSettingsQuery,
-  );
+  const { items } = await sdk.fetchQuery({
+    initialData: {
+      items: [],
+    },
+    queryKey: ["appSettings"],
+    queryFn: () =>
+      request({
+        url: process.env.CONTENTFUL_GRAPHQL_URL!,
+        document: AppSettingsCollectionDocument,
+        variables: {
+          locale,
+          preview: process.env.NODE_ENV === "development",
+          limit: 1,
+        },
+      }),
+  });
+  console.log(items);
   return (
     <html lang={locale ?? routing.defaultLocale} suppressHydrationWarning>
       <body
