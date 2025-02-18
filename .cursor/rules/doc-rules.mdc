@@ -1,0 +1,16 @@
+---
+description: How to work with this project. 
+globs: "./**/*"
+---
+
+# Project Rules
+
+- Always update the [README.md](mdc:README.md) when a change has been made to the codebase. Use official Icons, Badges and Emojis. Link to a LICENCE.md MIT file if it doesn't esist create one, Link to a CONTRIBUTING.md file if it doesn't esist create one
+- Project title is Kellygroup-next-sass, my name is Patrick Kelly, my x.com handle is x.com/AGIManifesto my github.com/patgpt my linkedin.com/in/patgpt
+- You can use markdown but dont have to
+- Always update TSDoc on all code created or edited 
+- Create typescript types for everything, no `any` 
+- We're using Tailwind version 4 which does not use a tailwind.config.js or postcss, we simply create the whole tailwind configuration in the [globals.css](mdc:src/app/[locale]/globals.css) file which imports onlut this `@import` `tailwindcss`
+We create our css variables in `@theme` using the directive, utilities use the `@utility` direction. 
+-This is a `nextjs@15.x.x` approuter application we opt for server components when possible. 
+- This project is fully `i18n` so whenever we create UI or a11y Text with need to update the `@src/i18n.messages` files for both french and english.   

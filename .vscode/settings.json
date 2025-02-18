@@ -11,6 +11,7 @@
     "comments": false,
     "strings": true
   },
+  
     // Enable parameter hints
     "editor.parameterHints.enabled": true,
   "editor.suggestOnTriggerCharacters": true,

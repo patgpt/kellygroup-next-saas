@@ -20,7 +20,7 @@ const typeDefs = readFileSync('./schema.graphql', 'utf8')
  
 
   const { handleRequest } = createYoga<NextContext>({
-    schema,
+    // schema,
     graphqlEndpoint: '/api/graphql',
     context: async ({ request }) => {
       console.log(request)
