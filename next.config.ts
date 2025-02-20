@@ -8,6 +8,12 @@ const withNextIntl = createNextIntlPlugin({
 });
 const nextConfig: NextConfig = {
   /* config options here */
+  images: {
+    remotePatterns: [
+      { hostname: "images.unsplash.com" },
+      { hostname: "ctfassets.net" },
+    ],
+  },
 };
 
 export default withNextIntl(nextConfig);

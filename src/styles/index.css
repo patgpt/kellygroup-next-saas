@@ -1,0 +1,941 @@
+/* globals.css */
+@import "tailwindcss";
+
+@theme {
+  /* Colors - Refined for Neumorphic depth */
+  --color-background: oklch(0.98 0.01 0); /* Base surface */
+  --color-foreground: oklch(0.3 0.02 0); /* Slightly softer text */
+  --color-surface: oklch(0.96 0.01 0); /* Raised elements */
+  --color-inset: oklch(0.94 0.01 0); /* Pressed elements */
+  --color-primary: oklch(0.65 0.15 200); /* Teal accent */
+  --color-primary-foreground: oklch(0.98 0.01 0);
+  --color-muted: oklch(0.92 0.01 0); /* Subtle gray */
+  --color-muted-foreground: oklch(0.5 0.02 0); /* A11y-compliant */
+  --color-accent: oklch(0.75 0.12 260); /* Blue accent */
+  --color-accent-foreground: oklch(0.3 0.02 0);
+  --color-border: oklch(0.9 0.01 0); /* Softer edge */
+  --color-ring: oklch(0.65 0.15 200); /* Matches primary */
+  --color-destructive: oklch(0.9 0.01 0);
+  --color-destructive-foreground: oklch(0.3 0.02 0);
+  --color-destructive-rgb: 255, 255, 255;
+
+  /* Spacing */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+
+  /* Radius */
+  --radius-lg: 0.75rem; /* Increased for softer look */
+
+  /* Shadows - Softer and more cohesive */
+  --shadow-nm-soft:
+    2px 2px 4px oklch(0.9 0.01 0 / 0.1), -2px -2px 4px oklch(0.99 0.01 0 / 0.8);
+  --shadow-nm-medium:
+    4px 4px 8px oklch(0.9 0.01 0 / 0.15),
+    -4px -4px 8px oklch(0.99 0.01 0 / 0.85);
+  --shadow-nm-deep:
+    6px 6px 12px oklch(0.9 0.01 0 / 0.2),
+    -6px -6px 12px oklch(0.99 0.01 0 / 0.9);
+  --shadow-nm-inset-soft:
+    inset 2px 2px 4px oklch(0.9 0.01 0 / 0.1),
+    inset -2px -2px 4px oklch(0.99 0.01 0 / 0.8);
+  --shadow-nm-inset-deep:
+    inset 4px 4px 8px oklch(0.9 0.01 0 / 0.15),
+    inset -4px -4px 8px oklch(0.99 0.01 0 / 0.85);
+
+  /* Text Shadows - Subtler transitions */
+  --text-shadow-emboss-raised:
+    -1px -1px 1px oklch(0.99 0.01 0 / 0.6), 1px 1px 1px oklch(0.9 0.01 0 / 0.15);
+  --text-shadow-emboss-recessed:
+    1px 1px 1px oklch(0.9 0.01 0 / 0.15), -1px -1px 1px oklch(0.99 0.01 0 / 0.6);
+  --text-shadow-emboss-soft:
+    -1px -1px 2px oklch(0.99 0.01 0 / 0.5), 1px 1px 2px oklch(0.9 0.01 0 / 0.1);
+  --text-shadow-emboss-bold:
+    -2px -2px 2px oklch(0.99 0.01 0 / 0.7), 2px 2px 2px oklch(0.9 0.01 0 / 0.2);
+  --text-shadow-emboss-deep:
+    2px 2px 3px oklch(0.9 0.01 0 / 0.2), -2px -2px 3px oklch(0.99 0.01 0 / 0.7);
+  --text-shadow-emboss-gradient:
+    -1px -1px 1px oklch(0.99 0.01 0 / 0.6), 1px 1px 1px oklch(0.9 0.01 0 / 0.15);
+
+  /* Dark Mode */
+}
+.dark {
+  --color-background: oklch(0.15 0.01 0);
+  --color-foreground: oklch(0.9 0.01 0);
+  --color-surface: oklch(0.18 0.01 0);
+  --color-inset: oklch(0.2 0.01 0);
+  --color-primary: oklch(0.75 0.12 260);
+  --color-primary-foreground: oklch(0.15 0.01 0);
+  --color-muted: oklch(0.25 0.01 0);
+  --color-muted-foreground: oklch(0.7 0.02 0);
+  --color-accent: oklch(0.65 0.15 200);
+  --color-accent-foreground: oklch(0.9 0.01 0);
+  --color-border: oklch(0.22 0.01 0);
+  --color-ring: oklch(0.75 0.12 260);
+  --shadow-nm-soft:
+    2px 2px 4px oklch(0.1 0.01 0 / 0.8), -2px -2px 4px oklch(0.25 0.01 0 / 0.15);
+  --shadow-nm-medium:
+    4px 4px 8px oklch(0.1 0.01 0 / 0.85), -4px -4px 8px oklch(0.25 0.01 0 / 0.2);
+  --shadow-nm-deep:
+    6px 6px 12px oklch(0.1 0.01 0 / 0.9),
+    -6px -6px 12px oklch(0.25 0.01 0 / 0.25);
+  --shadow-nm-inset-soft:
+    inset 2px 2px 4px oklch(0.1 0.01 0 / 0.8),
+    inset -2px -2px 4px oklch(0.25 0.01 0 / 0.15);
+  --shadow-nm-inset-deep:
+    inset 4px 4px 8px oklch(0.1 0.01 0 / 0.85),
+    inset -4px -4px 8px oklch(0.25 0.01 0 / 0.2);
+  --text-shadow-emboss-raised:
+    -1px -1px 1px oklch(0.25 0.01 0 / 0.15), 1px 1px 1px oklch(0.1 0.01 0 / 0.6);
+  --text-shadow-emboss-recessed:
+    1px 1px 1px oklch(0.1 0.01 0 / 0.6), -1px -1px 1px oklch(0.25 0.01 0 / 0.15);
+  --text-shadow-emboss-soft:
+    -1px -1px 2px oklch(0.25 0.01 0 / 0.1), 1px 1px 2px oklch(0.1 0.01 0 / 0.5);
+  --text-shadow-emboss-bold:
+    -2px -2px 2px oklch(0.25 0.01 0 / 0.2), 2px 2px 2px oklch(0.1 0.01 0 / 0.7);
+  --text-shadow-emboss-deep:
+    2px 2px 3px oklch(0.1 0.01 0 / 0.2), -2px -2px 3px oklch(0.25 0.01 0 / 0.7);
+  --text-shadow-emboss-gradient:
+    -1px -1px 1px oklch(0.25 0.01 0 / 0.15), 1px 1px 1px oklch(0.1 0.01 0 / 0.6);
+}
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1 {
+    @apply from-background to-muted text-foreground text-emboss-bold dark:text-foreground mb-4 bg-gradient-to-br text-4xl font-bold;
+  }
+  h2 {
+    @apply from-background to-muted text-foreground text-emboss-bold dark:text-foreground mb-3 bg-gradient-to-br text-2xl font-semibold;
+  }
+  h3 {
+    @apply from-background to-muted text-foreground text-emboss-raised dark:text-foreground mb-2 bg-gradient-to-br text-xl font-medium;
+  }
+  p {
+    @apply text-foreground text-emboss-soft dark:text-foreground mb-4;
+  }
+  a {
+    @apply text-accent hover:text-primary focus-visible:outline-ring dark:text-accent dark:hover:text-primary;
+  }
+  ul {
+    @apply text-foreground text-emboss-soft dark:text-foreground mb-4 list-disc pl-6;
+  }
+  ol {
+    @apply text-foreground text-emboss-soft dark:text-foreground mb-4 list-decimal pl-6;
+  }
+  blockquote {
+    @apply nm-flat border-border text-muted-foreground dark:text-muted-foreground mb-4 border-l-4 p-4 italic;
+  }
+  code {
+    @apply nm-pressed text-foreground bg-inset dark:text-foreground dark:bg-inset rounded px-2 py-1 text-sm;
+  }
+  pre {
+    @apply nm-pressed text-foreground bg-inset dark:text-foreground dark:bg-inset mb-4 overflow-auto rounded-lg p-4 text-sm;
+  }
+  hr {
+    @apply nm-flat from-background via-muted to-background mb-4 h-px border-0 bg-gradient-to-r;
+  }
+  table {
+    @apply nm-flat mb-4 w-full border-collapse;
+  }
+  th {
+    @apply nm-raised text-foreground text-emboss-bold dark:text-foreground p-4 text-left font-medium;
+  }
+  td {
+    @apply nm-flat text-foreground text-emboss-soft dark:text-foreground p-4;
+  }
+  li {
+    @apply text-foreground text-emboss-soft dark:text-foreground mb-4 list-disc pl-6;
+  }
+  li {
+    @apply text-foreground text-emboss-soft dark:text-foreground mb-4 list-none pl-6;
+  }
+}
+
+@layer components {
+  /* =================================
+   * Collapsible Component Styles
+   * ================================= */
+
+  /* Base container styles for different variants */
+  .collapsible {
+    @apply w-full max-w-md; /* Default size */
+  }
+  .collapsible-compact {
+    @apply w-full max-w-xs; /* Compact size for smaller spaces */
+  }
+  .collapsible-wide {
+    @apply w-full max-w-lg; /* Wide size for more content */
+  }
+
+  /* Header section containing the trigger */
+  .collapsible-header {
+    @apply flex items-center justify-between;
+  }
+
+  /* Trigger button with neumorphic effects */
+  .collapsible-trigger {
+    @apply nm-raised /* Base neumorphic raised effect */ from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:text-accent focus-visible:outline-ring active:nm-pressed /* Press effect on click */ dark:text-foreground dark:hover:text-accent flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br p-1 transition-all duration-200;
+  }
+
+  /* Content area with spacing */
+  .collapsible-content {
+    @apply mt-2; /* Space between trigger and content */
+  }
+
+  /* Individual items within the collapsible */
+  .collapsible-item {
+    @apply nm-flat /* Subtle flat neumorphic effect */ from-surface to-muted dark:from-surface dark:to-muted shadow-nm-soft my-2 rounded-md bg-gradient-to-br p-2 transition-all duration-200;
+  }
+
+  /* Collapsible Base and Variants */
+  .collapsible {
+    @apply w-full max-w-md;
+  }
+  .collapsible-compact {
+    @apply w-full max-w-xs;
+  }
+  .collapsible-wide {
+    @apply w-full max-w-lg;
+  }
+  .collapsible-header {
+    @apply flex items-center justify-between;
+  }
+  .collapsible-trigger {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br p-1 transition-all duration-200 dark:bg-gradient-to-br;
+  }
+  .collapsible-content {
+    @apply mt-2;
+  }
+  .collapsible-item {
+    @apply nm-flat from-surface to-muted dark:from-surface dark:to-muted shadow-nm-soft my-2 rounded-md bg-gradient-to-br p-2 transition-all duration-200 dark:bg-gradient-to-br;
+  }
+  /* Alert Dialog */
+  .alert-dialog-trigger {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent rounded-lg bg-gradient-to-br px-4 py-2 font-medium transition-all duration-200 dark:bg-gradient-to-br;
+  }
+  .alert-dialog-overlay {
+    @apply bg-muted/50 dark:bg-muted/75 fixed inset-0 backdrop-blur-sm transition-opacity duration-300;
+    &[data-state="open"] {
+      @apply opacity-100;
+    }
+    &[data-state="closed"] {
+      @apply opacity-0;
+    }
+  }
+  .alert-dialog-content {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-deep fixed top-1/2 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-lg bg-gradient-to-br p-6 transition-all duration-300 focus:outline-none dark:bg-gradient-to-br;
+    &[data-state="open"] {
+      @apply scale-100 opacity-100;
+    }
+    &[data-state="closed"] {
+      @apply scale-95 opacity-0;
+    }
+  }
+  .alert-dialog-title {
+    @apply text-foreground text-emboss-bold dark:text-foreground mb-2 text-lg font-semibold;
+  }
+  .alert-dialog-description {
+    @apply text-muted-foreground text-emboss-soft dark:text-muted-foreground mb-4 text-sm;
+  }
+  .alert-dialog-actions {
+    @apply mt-6 flex justify-end gap-4;
+  }
+  .alert-dialog-cancel {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent rounded-lg bg-gradient-to-br px-4 py-2 font-medium transition-all duration-200 dark:bg-gradient-to-br;
+  }
+  .alert-dialog-action {
+    @apply nm-raised text-destructive-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-destructive-foreground dark:hover:text-accent rounded-lg bg-gradient-to-br from-[rgba(var(--color-destructive-rgb),0.8)] px-4 py-2 font-medium transition-all duration-200 dark:bg-gradient-to-br dark:from-[rgba(var(--color-destructive-rgb),0.8)];
+  }
+  /* Drawer */
+  .drawer {
+    @apply bg-background dark:bg-background fixed z-[100] w-full;
+    &.top {
+      @apply top-0 right-0 left-0 max-h-[20rem] rounded-b-lg md:mx-auto md:max-w-[40rem];
+    }
+    &.bottom {
+      @apply right-0 bottom-0 left-0 max-h-[20rem] rounded-t-lg md:mx-auto md:max-w-[40rem];
+    }
+    &.left {
+      @apply inset-y-0 left-0 max-w-[16rem] rounded-r-lg md:w-64;
+    }
+    &.right {
+      @apply inset-y-0 right-0 max-w-[16rem] rounded-l-lg md:w-64;
+    }
+  }
+  .drawer-overlay {
+    @apply bg-muted/50 dark:bg-muted/75 fixed inset-0 z-[99] backdrop-blur-sm;
+  }
+  .drawer-content {
+    @apply from-background to-muted flex h-full flex-col bg-gradient-to-br p-6;
+  }
+  .drawer-header {
+    @apply border-border nm-flat flex items-center justify-between border-b pb-4;
+  }
+  .drawer-body {
+    @apply flex-1 py-4;
+  }
+
+  /* Horizontal Nav */
+  .nav-horizontal {
+    @apply flex items-center gap-4;
+  }
+
+  /* Footer */
+  .footer {
+    @apply border-border bg-background dark:bg-background border-t py-8;
+  }
+
+  /* Gallery Card */
+  .gallery-card {
+    @apply nm-flat bg-surface dark:bg-surface border-border rounded-lg border p-6;
+  }
+  /* Card Base and Variations */
+  .card {
+    @apply nm-raised bg-surface dark:bg-surface flex flex-col gap-4 rounded-lg p-6 transition-all duration-200;
+  }
+  .card-flat {
+    @apply nm-flat bg-surface dark:bg-surface flex flex-col gap-4 rounded-lg p-6 transition-all duration-200;
+  }
+  .card-deep {
+    @apply shadow-nm-deep bg-surface dark:bg-surface flex flex-col gap-4 rounded-lg p-6 transition-all duration-200;
+  }
+  .card-header {
+    @apply border-border flex items-center justify-between border-b pb-4;
+  }
+  .card-content {
+    @apply flex-1;
+  }
+  .card-footer {
+    @apply border-border flex items-center justify-between border-t pt-4;
+  }
+  .card-image {
+    @apply mb-4 h-48 w-full rounded-t-lg object-cover;
+  }
+
+  /* Label */
+  .neu-label {
+    @apply text-foreground text-emboss-soft dark:text-foreground font-medium;
+  }
+
+  /* Menubar - Neumorphic Adaptation */
+  .menubar {
+    @apply nm-raised bg-surface dark:bg-surface flex gap-2 rounded-lg p-1;
+  }
+  .menubar-trigger {
+    @apply nm-flat text-foreground text-emboss-soft hover:nm-raised focus-visible:outline-ring dark:text-foreground rounded-lg px-4 py-2 transition-all duration-200;
+  }
+  .menubar-content {
+    @apply nm-raised bg-surface dark:bg-surface shadow-nm-medium min-w-[12rem] rounded-lg p-2;
+  }
+  .menubar-item {
+    @apply nm-flat text-foreground text-emboss-soft hover:nm-raised focus-visible:outline-ring dark:text-foreground flex items-center gap-2 rounded-md px-3 py-2 transition-all duration-200;
+  }
+  .menubar-separator {
+    @apply nm-flat from-background via-muted to-background my-2 h-px bg-gradient-to-r;
+  }
+  .menubar-sub-trigger {
+    @apply nm-flat text-foreground text-emboss-soft hover:nm-raised focus-visible:outline-ring dark:text-foreground flex items-center justify-between gap-2 rounded-md px-3 py-2 transition-all duration-200;
+  }
+  .menubar-sub-content {
+    @apply nm-raised bg-surface dark:bg-surface shadow-nm-medium min-w-[12rem] rounded-lg p-2;
+  }
+  /* Form Base and Variations */
+  .form {
+    @apply nm-flat bg-surface dark:bg-surface flex w-full max-w-md flex-col gap-4 rounded-lg p-6;
+  }
+  .form-wide {
+    @apply nm-flat bg-surface dark:bg-surface flex w-full max-w-3xl flex-col gap-4 rounded-lg p-6;
+  }
+  .form-compact {
+    @apply nm-flat bg-surface dark:bg-surface flex w-full max-w-xs flex-col gap-2 rounded-lg p-4;
+  }
+  .form-field {
+    @apply grid gap-2;
+  }
+  .form-label {
+    @apply text-foreground text-emboss-soft dark:text-foreground text-sm font-medium md:text-base;
+  }
+  .form-message {
+    @apply text-muted-foreground text-emboss-soft dark:text-muted-foreground text-xs opacity-80 md:text-sm;
+  }
+  .form-control {
+    @apply nm-pressed from-inset to-muted text-foreground text-emboss-soft border-border focus:ring-ring hover:nm-raised dark:text-foreground w-full rounded-lg border bg-gradient-to-br px-4 py-2 transition-all duration-200 focus:ring-2 focus:outline-none;
+  }
+  .form-textarea {
+    @apply nm-pressed from-inset to-muted text-foreground text-emboss-soft border-border focus:ring-ring hover:nm-raised dark:text-foreground min-h-[80px] w-full resize-y rounded-lg border bg-gradient-to-br px-4 py-2 transition-all duration-200 focus:ring-2 focus:outline-none;
+  }
+  .form-submit {
+    @apply nm-raised from-surface to-muted text-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent mt-4 w-full rounded-lg bg-gradient-to-br px-6 py-3 font-medium transition-all duration-200;
+  }
+  /* Dropdown Menu */
+  .dropdown-menu {
+    @apply inline-flex items-center;
+  }
+  .dropdown-trigger {
+    @apply nm-raised from-surface to-muted text-foreground text-emboss-soft hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br p-2 transition-all duration-200;
+  }
+  .dropdown-content {
+    @apply nm-raised from-surface to-muted shadow-nm-medium dark:from-surface dark:to-muted z-50 min-w-[12rem] rounded-lg bg-gradient-to-br p-2 dark:bg-gradient-to-br;
+  }
+  .dropdown-item {
+    @apply nm-flat text-foreground text-emboss-soft hover:nm-raised focus-visible:outline-ring dark:text-foreground relative flex items-center gap-2 rounded-md px-3 py-2 transition-all duration-200;
+  }
+  .dropdown-separator {
+    @apply nm-flat from-background via-muted to-background my-2 h-px bg-gradient-to-r;
+  }
+  .dropdown-sub-trigger {
+    @apply nm-flat text-foreground text-emboss-soft hover:nm-raised focus-visible:outline-ring dark:text-foreground relative flex items-center justify-between gap-2 rounded-md px-3 py-2 transition-all duration-200;
+  }
+  .dropdown-sub-content {
+    @apply nm-raised from-surface to-muted shadow-nm-medium dark:from-surface dark:to-muted min-w-[12rem] rounded-lg bg-gradient-to-br p-2 dark:bg-gradient-to-br;
+  }
+  .dropdown-label {
+    @apply text-muted-foreground text-emboss-soft dark:text-muted-foreground px-3 py-1 text-xs;
+  }
+  .dropdown-item-indicator {
+    @apply absolute left-0 inline-flex w-6 items-center justify-center;
+  }
+  .dropdown-arrow {
+    @apply fill-surface dark:fill-surface;
+  }
+  /* AppBar */
+  .appbar {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-medium fixed top-0 right-0 left-0 z-50 mx-auto flex w-full max-w-full items-center justify-between rounded-lg bg-gradient-to-br p-4 dark:bg-gradient-to-br;
+  }
+  .appbar-drawer-button {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br p-2 transition-all duration-200 md:hidden dark:bg-gradient-to-br;
+  }
+  .appbar-title {
+    @apply text-foreground text-emboss-bold dark:text-foreground flex items-center text-lg font-semibold;
+  }
+  .appbar-nav {
+    @apply hidden flex-1 items-center justify-center gap-4 md:flex;
+  }
+  .appbar-toolbar {
+    @apply flex items-center gap-2;
+  }
+  /* Dialog */
+  .dialog-trigger {
+    @apply nm-raised from-surface to-muted text-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent rounded-lg bg-gradient-to-br px-4 py-2 font-medium transition-all duration-200;
+  }
+  .dialog-overlay {
+    @apply bg-muted/50 dark:bg-muted/75 fixed inset-0 backdrop-blur-sm transition-opacity duration-300;
+    &[data-state="open"] {
+      @apply opacity-100;
+    }
+    &[data-state="closed"] {
+      @apply opacity-0;
+    }
+  }
+  .dialog-content {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-deep fixed top-1/2 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-lg bg-gradient-to-br p-6 transition-all duration-300 focus:outline-none dark:bg-gradient-to-br;
+    &[data-state="open"] {
+      @apply scale-100 opacity-100;
+    }
+    &[data-state="closed"] {
+      @apply scale-95 opacity-0;
+    }
+  }
+  .dialog-title {
+    @apply text-foreground text-emboss-bold dark:text-foreground mb-2 text-lg font-semibold;
+  }
+  .dialog-description {
+    @apply text-muted-foreground text-emboss-soft dark:text-muted-foreground mb-4 text-sm;
+  }
+  .dialog-close {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br p-1 transition-all duration-200 dark:bg-gradient-to-br;
+  }
+  /* Switch Base and Variants */
+  .switch {
+    @apply nm-pressed from-inset to-muted dark:from-inset dark:to-muted shadow-nm-inset-soft focus:ring-ring relative h-6 w-10 cursor-pointer rounded-full bg-gradient-to-br transition-all duration-200 focus:ring-2 focus:outline-none dark:bg-gradient-to-br;
+    &[data-state="checked"] {
+      @apply from-primary/80 to-primary bg-gradient-to-br;
+    }
+  }
+  .switch-small {
+    @apply nm-pressed from-inset to-muted dark:from-inset dark:to-muted shadow-nm-inset-soft focus:ring-ring relative h-5 w-8 cursor-pointer rounded-full bg-gradient-to-br transition-all duration-200 focus:ring-2 focus:outline-none dark:bg-gradient-to-br;
+    &[data-state="checked"] {
+      @apply from-primary/80 to-primary bg-gradient-to-br;
+    }
+  }
+  .switch-large {
+    @apply nm-pressed from-inset to-muted dark:from-inset dark:to-muted shadow-nm-inset-soft focus:ring-ring relative h-8 w-14 cursor-pointer rounded-full bg-gradient-to-br transition-all duration-200 focus:ring-2 focus:outline-none dark:bg-gradient-to-br;
+    &[data-state="checked"] {
+      @apply from-primary/80 to-primary bg-gradient-to-br;
+    }
+  }
+  .switch-thumb {
+    @apply nm-raised bg-surface dark:bg-surface absolute top-0.5 left-0.5 h-5 w-5 rounded-full transition-transform duration-200;
+    &[data-state="checked"] {
+      @apply translate-x-4;
+    }
+  }
+  .switch-thumb-small {
+    @apply nm-raised bg-surface dark:bg-surface absolute top-0.5 left-0.5 h-4 w-4 rounded-full transition-transform duration-200;
+    &[data-state="checked"] {
+      @apply translate-x-3;
+    }
+  }
+  .switch-thumb-large {
+    @apply nm-raised bg-surface dark:bg-surface absolute top-0.5 left-0.5 h-7 w-7 rounded-full transition-transform duration-200;
+    &[data-state="checked"] {
+      @apply translate-x-6;
+    }
+  }
+  /* Alert Dialog - Updated action button */
+  .alert-dialog-action {
+    @apply nm-raised text-destructive-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-destructive-foreground dark:hover:text-accent rounded-lg bg-gradient-to-br from-[rgba(var(--color-destructive-rgb),0.8)] px-4 py-2 font-medium transition-all duration-200 dark:bg-gradient-to-br dark:from-[rgba(var(--color-destructive-rgb),0.8)];
+  }
+  /* Avatar Base and Variations */
+  .avatar {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br transition-all duration-200 dark:bg-gradient-to-br;
+  }
+  .avatar-bordered {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted border-border flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-2 bg-gradient-to-br transition-all duration-200 dark:bg-gradient-to-br;
+  }
+  .avatar-sunken {
+    @apply nm-pressed from-inset to-muted dark:from-inset dark:to-muted shadow-nm-inset-deep flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br transition-all duration-200 dark:bg-gradient-to-br;
+  }
+  .avatar-outer-shadow {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-deep flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br transition-all duration-200 dark:bg-gradient-to-br;
+  }
+  .avatar-inner-shadow {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-inset-soft flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br transition-all duration-200 dark:bg-gradient-to-br;
+  }
+}
+
+/* =================================
+ * Collapsible Utility Classes
+ * ================================= */
+@utility collapsible {
+  @apply w-full max-w-md;
+}
+
+@utility collapsible-compact {
+  @apply w-full max-w-xs;
+}
+
+@utility collapsible-wide {
+  @apply w-full max-w-lg;
+}
+
+@utility collapsible-header {
+  @apply flex items-center justify-between;
+}
+
+@utility collapsible-trigger {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br p-1 transition-all duration-200;
+}
+
+@utility collapsible-content {
+  @apply mt-2;
+}
+
+@utility collapsible-item {
+  @apply nm-flat from-surface to-muted dark:from-surface dark:to-muted shadow-nm-soft my-2 rounded-md bg-gradient-to-br p-2 transition-all duration-200;
+}
+
+/* Utility Classes for Avatar */
+@utility avatar {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br transition-all duration-200 dark:bg-gradient-to-br;
+}
+@utility avatar-bordered {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted border-border flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-2 bg-gradient-to-br transition-all duration-200 dark:bg-gradient-to-br;
+}
+@utility avatar-sunken {
+  @apply nm-pressed from-inset to-muted dark:from-inset dark:to-muted shadow-nm-inset-deep flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br transition-all duration-200 dark:bg-gradient-to-br;
+}
+@utility avatar-outer-shadow {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-deep flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br transition-all duration-200 dark:bg-gradient-to-br;
+}
+@utility avatar-inner-shadow {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-inset-soft flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br transition-all duration-200 dark:bg-gradient-to-br;
+}
+/* Utility Classes for Alert Dialog - Updated action button */
+@utility alert-dialog-action {
+  @apply nm-raised text-destructive-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-destructive-foreground dark:hover:text-accent rounded-lg bg-gradient-to-br from-[rgba(var(--color-destructive-rgb),0.8)] px-4 py-2 font-medium transition-all duration-200 dark:bg-gradient-to-br dark:from-[rgba(var(--color-destructive-rgb),0.8)];
+}
+/* Utility Classes for Alert Dialog */
+@utility alert-dialog-trigger {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent rounded-lg bg-gradient-to-br px-4 py-2 font-medium transition-all duration-200 dark:bg-gradient-to-br;
+}
+@utility alert-dialog-overlay {
+  @apply bg-muted/50 dark:bg-muted/75 fixed inset-0 backdrop-blur-sm transition-opacity duration-300;
+  &[data-state="open"] {
+    @apply opacity-100;
+  }
+  &[data-state="closed"] {
+    @apply opacity-0;
+  }
+}
+/* Utility Classes for Switch */
+@utility switch {
+  @apply nm-pressed from-inset to-muted dark:from-inset dark:to-muted shadow-nm-inset-soft focus:ring-ring relative h-6 w-10 cursor-pointer rounded-full bg-gradient-to-br transition-all duration-200 focus:ring-2 focus:outline-none dark:bg-gradient-to-br;
+  &[data-state="checked"] {
+    @apply from-primary/80 to-primary bg-gradient-to-br;
+  }
+}
+@utility switch-small {
+  @apply nm-pressed from-inset to-muted dark:from-inset dark:to-muted shadow-nm-inset-soft focus:ring-ring relative h-5 w-8 cursor-pointer rounded-full bg-gradient-to-br transition-all duration-200 focus:ring-2 focus:outline-none dark:bg-gradient-to-br;
+  &[data-state="checked"] {
+    @apply from-primary/80 to-primary bg-gradient-to-br;
+  }
+}
+@utility switch-large {
+  @apply nm-pressed from-inset to-muted dark:from-inset dark:to-muted shadow-nm-inset-soft focus:ring-ring relative h-8 w-14 cursor-pointer rounded-full bg-gradient-to-br transition-all duration-200 focus:ring-2 focus:outline-none dark:bg-gradient-to-br;
+  &[data-state="checked"] {
+    @apply from-primary/80 to-primary bg-gradient-to-br;
+  }
+}
+@utility switch-thumb {
+  @apply nm-raised bg-surface dark:bg-surface absolute top-0.5 left-0.5 h-5 w-5 rounded-full transition-transform duration-200;
+  &[data-state="checked"] {
+    @apply translate-x-4;
+  }
+}
+@utility switch-thumb-small {
+  @apply nm-raised bg-surface dark:bg-surface absolute top-0.5 left-0.5 h-4 w-4 rounded-full transition-transform duration-200;
+  &[data-state="checked"] {
+    @apply translate-x-3;
+  }
+}
+@utility switch-thumb-large {
+  @apply nm-raised bg-surface dark:bg-surface absolute top-0.5 left-0.5 h-7 w-7 rounded-full transition-transform duration-200;
+  &[data-state="checked"] {
+    @apply translate-x-6;
+  }
+}
+@utility alert-dialog-content {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-deep fixed top-1/2 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-lg bg-gradient-to-br p-6 transition-all duration-300 focus:outline-none dark:bg-gradient-to-br;
+  &[data-state="open"] {
+    @apply scale-100 opacity-100;
+  }
+  &[data-state="closed"] {
+    @apply scale-95 opacity-0;
+  }
+}
+@utility alert-dialog-title {
+  @apply text-foreground text-emboss-bold dark:text-foreground mb-2 text-lg font-semibold;
+}
+@utility alert-dialog-description {
+  @apply text-muted-foreground text-emboss-soft dark:text-muted-foreground mb-4 text-sm;
+}
+@utility alert-dialog-actions {
+  @apply mt-6 flex justify-end gap-4;
+}
+@utility alert-dialog-cancel {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent rounded-lg bg-gradient-to-br px-4 py-2 font-medium transition-all duration-200 dark:bg-gradient-to-br;
+}
+@utility alert-dialog-action {
+  @apply nm-raised text-destructive-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-destructive-foreground dark:hover:text-accent rounded-lg bg-gradient-to-br from-[rgba(var(--color-destructive-rgb),0.8)] px-4 py-2 font-medium transition-all duration-200 dark:bg-gradient-to-br dark:from-[rgba(var(--color-destructive-rgb),0.8)];
+}
+/* Utility Classes for Dialog */
+@utility dialog-trigger {
+  @apply nm-raised from-surface to-muted text-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent rounded-lg bg-gradient-to-br px-4 py-2 font-medium transition-all duration-200;
+}
+@utility dialog-overlay {
+  @apply bg-muted/50 dark:bg-muted/75 fixed inset-0 backdrop-blur-sm transition-opacity duration-300;
+  &[data-state="open"] {
+    @apply opacity-100;
+  }
+  &[data-state="closed"] {
+    @apply opacity-0;
+  }
+}
+@utility dialog-content {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-deep fixed top-1/2 left-1/2 z-50 max-h-[85vh] w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-lg bg-gradient-to-br p-6 transition-all duration-300 focus:outline-none dark:bg-gradient-to-br;
+  &[data-state="open"] {
+    @apply scale-100 opacity-100;
+  }
+  &[data-state="closed"] {
+    @apply scale-95 opacity-0;
+  }
+  /* Separator Base and Variations */
+  .separator {
+    @apply nm-flat from-background via-muted to-background my-4 bg-gradient-to-r transition-all duration-200 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px;
+  }
+  .separator-subtle {
+    @apply nm-flat from-background via-muted/50 to-background my-2 bg-gradient-to-r transition-all duration-200 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px;
+  }
+  .separator-prominent {
+    @apply nm-raised from-surface via-muted to-surface my-6 bg-gradient-to-r transition-all duration-200 data-[orientation=horizontal]:h-1 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1;
+  }
+  /* Navigation Menu */
+  .nav-menu {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-medium relative z-10 flex w-full max-w-full justify-center rounded-lg bg-gradient-to-br p-2 dark:bg-gradient-to-br;
+  }
+  .nav-menu-list {
+    @apply m-0 flex list-none items-center gap-2;
+  }
+  .nav-menu-item {
+    @apply relative;
+  }
+  .nav-menu-trigger {
+    @apply nm-flat from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:nm-raised focus-visible:outline-ring dark:text-foreground flex items-center gap-1 rounded-md bg-gradient-to-br px-4 py-2 font-medium transition-all duration-200 dark:bg-gradient-to-br;
+    &[data-state="open"] {
+      @apply nm-pressed;
+    }
+    .caret-down {
+      @apply transition-transform duration-200 ease-in;
+      &[data-state="open"] {
+        @apply -rotate-180;
+      }
+    }
+  }
+  .nav-menu-content {
+    @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-medium absolute top-full left-0 z-10 mx-auto w-full max-w-[600px] rounded-lg bg-gradient-to-br p-4 transition-all duration-300 dark:bg-gradient-to-br;
+  }
+  .nav-menu-link {
+    @apply nm-flat from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:nm-raised focus-visible:outline-ring dark:text-foreground block rounded-md bg-gradient-to-br px-4 py-2 transition-all duration-200 dark:bg-gradient-to-br;
+  }
+  .nav-menu-indicator {
+    @apply absolute top-full left-0 z-10 flex h-2 w-full items-end justify-center transition-all duration-200;
+    .indicator-arrow {
+      @apply bg-surface dark:bg-surface mt-1 h-2 w-2 rotate-45 rounded-tl-sm;
+    }
+  }
+  .nav-menu-viewport {
+    @apply bg-surface dark:bg-surface absolute top-full left-0 z-10 mx-auto mt-2 w-full max-w-[600px] overflow-hidden rounded-lg transition-all duration-300;
+  }
+  .nav-menu-list-item {
+    @apply nm-flat from-surface to-muted dark:from-surface dark:to-muted hover:nm-raised focus-visible:outline-ring rounded-md bg-gradient-to-br p-3 transition-all duration-200 dark:bg-gradient-to-br;
+    .title {
+      @apply text-foreground text-emboss-bold dark:text-foreground mb-1 font-medium;
+    }
+    .description {
+      @apply text-muted-foreground text-emboss-soft dark:text-muted-foreground text-sm;
+    }
+  }
+}
+
+/* Utility Classes for Navigation Menu */
+@utility nav-menu {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-medium relative z-10 flex w-full max-w-full justify-center rounded-lg bg-gradient-to-br p-2 dark:bg-gradient-to-br;
+}
+@utility nav-menu-list {
+  @apply m-0 flex list-none items-center gap-2;
+}
+@utility nav-menu-item {
+  @apply relative;
+}
+@utility nav-menu-trigger {
+  @apply nm-flat from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:nm-raised focus-visible:outline-ring dark:text-foreground flex items-center gap-1 rounded-md bg-gradient-to-br px-4 py-2 font-medium transition-all duration-200 dark:bg-gradient-to-br;
+  &[data-state="open"] {
+    @apply nm-pressed;
+  }
+}
+@utility nav-menu-content {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-medium absolute top-full left-0 z-10 mx-auto w-full max-w-[600px] rounded-lg bg-gradient-to-br p-4 transition-all duration-300 dark:bg-gradient-to-br;
+}
+@utility nav-menu-link {
+  @apply nm-flat from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:nm-raised focus-visible:outline-ring dark:text-foreground block rounded-md bg-gradient-to-br px-4 py-2 transition-all duration-200 dark:bg-gradient-to-br;
+}
+@utility nav-menu-indicator {
+  @apply absolute top-full left-0 z-10 flex h-2 w-full items-end justify-center transition-all duration-200;
+}
+@utility nav-menu-viewport {
+  @apply bg-surface dark:bg-surface absolute top-full left-0 z-10 mx-auto mt-2 w-full max-w-[600px] overflow-hidden rounded-lg transition-all duration-300;
+}
+@utility nav-menu-list-item {
+  @apply nm-flat from-surface to-muted dark:from-surface dark:to-muted hover:nm-raised focus-visible:outline-ring rounded-md bg-gradient-to-br p-3 transition-all duration-200 dark:bg-gradient-to-br;
+}
+/* Utility Classes for Separator */
+@utility separator {
+  @apply nm-flat from-background via-muted to-background my-4 bg-gradient-to-r transition-all duration-200 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px;
+}
+@utility separator-subtle {
+  @apply nm-flat from-background via-muted/50 to-background my-2 bg-gradient-to-r transition-all duration-200 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px;
+}
+@utility separator-prominent {
+  @apply nm-raised from-surface via-muted to-surface my-6 bg-gradient-to-r transition-all duration-200 data-[orientation=horizontal]:h-1 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1;
+}
+/* Utility Classes for Drawer */
+@utility dialog-title {
+  @apply text-foreground text-emboss-bold dark:text-foreground mb-2 text-lg font-semibold;
+}
+@utility dialog-description {
+  @apply text-muted-foreground text-emboss-soft dark:text-muted-foreground mb-4 text-sm;
+}
+@utility dialog-close {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent absolute top-2 right-2 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br p-1 transition-all duration-200 dark:bg-gradient-to-br;
+}
+/* Utility Classes for AppBar */
+@utility appbar {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted shadow-nm-medium fixed top-0 right-0 left-0 z-50 mx-auto flex w-full max-w-full items-center justify-between rounded-lg bg-gradient-to-br p-4 dark:bg-gradient-to-br;
+}
+@utility appbar-drawer-button {
+  @apply nm-raised from-surface to-muted dark:from-surface dark:to-muted text-foreground text-emboss-soft hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br p-2 transition-all duration-200 md:hidden dark:bg-gradient-to-br;
+}
+@utility appbar-title {
+  @apply text-foreground text-emboss-bold dark:text-foreground flex items-center text-lg font-semibold;
+}
+@utility appbar-nav {
+  @apply hidden flex-1 items-center justify-center gap-4 md:flex;
+}
+@utility appbar-toolbar {
+  @apply flex items-center gap-2;
+}
+/* Utility Classes for Dropdown Menu */
+@utility dropdown-menu {
+  @apply inline-flex items-center;
+}
+@utility dropdown-trigger {
+  @apply nm-raised from-surface to-muted text-foreground text-emboss-soft hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br p-2 transition-all duration-200;
+}
+@utility dropdown-content {
+  @apply nm-raised from-surface to-muted shadow-nm-medium dark:from-surface dark:to-muted z-50 min-w-[12rem] rounded-lg bg-gradient-to-br p-2 dark:bg-gradient-to-br;
+}
+@utility dropdown-item {
+  @apply nm-flat text-foreground text-emboss-soft hover:nm-raised focus-visible:outline-ring dark:text-foreground relative flex items-center gap-2 rounded-md px-3 py-2 transition-all duration-200;
+}
+@utility dropdown-separator {
+  @apply nm-flat from-background via-muted to-background my-2 h-px bg-gradient-to-r;
+}
+@utility dropdown-sub-trigger {
+  @apply nm-flat text-foreground text-emboss-soft hover:nm-raised focus-visible:outline-ring dark:text-foreground relative flex items-center justify-between gap-2 rounded-md px-3 py-2 transition-all duration-200;
+}
+@utility dropdown-sub-content {
+  @apply nm-raised from-surface to-muted shadow-nm-medium dark:from-surface dark:to-muted min-w-[12rem] rounded-lg bg-gradient-to-br p-2 dark:bg-gradient-to-br;
+}
+@utility dropdown-label {
+  @apply text-muted-foreground text-emboss-soft dark:text-muted-foreground px-3 py-1 text-xs;
+}
+@utility dropdown-item-indicator {
+  @apply absolute left-0 inline-flex w-6 items-center justify-center;
+}
+@utility dropdown-arrow {
+  @apply fill-surface dark:fill-surface;
+}
+/* Utility Classes for Form */
+@utility form {
+  @apply nm-flat bg-surface dark:bg-surface flex w-full max-w-md flex-col gap-4 rounded-lg p-6;
+}
+@utility form-wide {
+  @apply nm-flat bg-surface dark:bg-surface flex w-full max-w-3xl flex-col gap-4 rounded-lg p-6;
+}
+@utility form-compact {
+  @apply nm-flat bg-surface dark:bg-surface flex w-full max-w-xs flex-col gap-2 rounded-lg p-4;
+}
+@utility form-field {
+  @apply grid gap-2;
+}
+@utility form-label {
+  @apply text-foreground text-emboss-soft dark:text-foreground text-sm font-medium md:text-base;
+}
+@utility form-message {
+  @apply text-muted-foreground text-emboss-soft dark:text-muted-foreground text-xs opacity-80 md:text-sm;
+}
+@utility form-control {
+  @apply nm-pressed from-inset to-muted text-foreground text-emboss-soft border-border focus:ring-ring hover:nm-raised dark:text-foreground w-full rounded-lg border bg-gradient-to-br px-4 py-2 transition-all duration-200 focus:ring-2 focus:outline-none;
+}
+@utility form-textarea {
+  @apply nm-pressed from-inset to-muted text-foreground text-emboss-soft border-border focus:ring-ring hover:nm-raised dark:text-foreground min-h-[80px] w-full resize-y rounded-lg border bg-gradient-to-br px-4 py-2 transition-all duration-200 focus:ring-2 focus:outline-none;
+}
+@utility form-submit {
+  @apply nm-raised from-surface to-muted text-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent mt-4 w-full rounded-lg bg-gradient-to-br px-6 py-3 font-medium transition-all duration-200;
+}
+/* Utility Classes for Card and Label */
+@utility card {
+  @apply nm-raised bg-surface dark:bg-surface flex flex-col gap-4 rounded-lg p-6 transition-all duration-200;
+}
+@utility card-flat {
+  @apply nm-flat bg-surface dark:bg-surface flex flex-col gap-4 rounded-lg p-6 transition-all duration-200;
+}
+@utility card-deep {
+  @apply shadow-nm-deep bg-surface dark:bg-surface flex flex-col gap-4 rounded-lg p-6 transition-all duration-200;
+}
+@utility neu-label {
+  @apply text-foreground text-emboss-soft dark:text-foreground font-medium;
+}
+@utility nm-flat {
+  @apply bg-surface shadow-nm-soft rounded-lg transition-all duration-200;
+}
+@utility nm-raised {
+  @apply bg-surface shadow-nm-medium hover:shadow-nm-deep active:shadow-nm-inset-soft rounded-lg transition-all duration-200;
+}
+@utility nm-pressed {
+  @apply bg-inset shadow-nm-inset-deep rounded-lg transition-all duration-200;
+}
+@utility text-emboss-raised {
+  @apply text-foreground duration-200;
+  text-shadow: var(--text-shadow-emboss-raised);
+  &:hover {
+    text-shadow:
+      -2px -2px 2px oklch(0.99 0.01 0 / 0.9),
+      2px 2px 2px oklch(0.9 0.01 0 / 0.25);
+  }
+}
+@utility text-emboss-recessed {
+  @apply text-foreground duration-200;
+  text-shadow: var(--text-shadow-emboss-recessed);
+  &:hover {
+    text-shadow:
+      2px 2px 2px oklch(0.9 0.01 0 / 0.25),
+      -2px -2px 2px oklch(0.99 0.01 0 / 0.9);
+  }
+}
+@utility text-emboss-soft {
+  @apply text-foreground duration-200;
+  text-shadow: var(--text-shadow-emboss-soft);
+  &:hover {
+    text-shadow:
+      -2px -2px 2px oklch(0.99 0.01 0 / 0.85),
+      2px 2px 2px oklch(0.9 0.01 0 / 0.15);
+  }
+}
+@utility text-emboss-bold {
+  @apply text-foreground duration-200;
+  text-shadow: var(--text-shadow-emboss-bold);
+  &:hover {
+    text-shadow:
+      -3px -3px 3px oklch(0.99 0.01 0 / 0.95),
+      3px 3px 3px oklch(0.9 0.01 0 / 0.35);
+  }
+}
+@utility text-emboss-deep {
+  @apply text-foreground duration-200;
+  text-shadow: var(--text-shadow-emboss-deep);
+  &:hover {
+    text-shadow:
+      3px 3px 4px oklch(0.9 0.01 0 / 0.35),
+      -3px -3px 4px oklch(0.99 0.01 0 / 0.95);
+  }
+}
+@utility text-emboss-gradient {
+  @apply duration-200;
+  background: linear-gradient(145deg, oklch(0.96 0.01 0), oklch(0.75 0.12 260));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: var(--text-shadow-emboss-gradient);
+  &:hover {
+    text-shadow:
+      -2px -2px 2px oklch(0.99 0.01 0 / 0.9),
+      2px 2px 2px oklch(0.9 0.01 0 / 0.25);
+  }
+}
+@utility desktop-navlink {
+  @apply nm-raised text-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring dark:text-foreground dark:hover:text-accent from-surface to-muted inline-flex items-center bg-gradient-to-br px-6 py-3 font-medium;
+}
+@utility footer-navlink {
+  @apply nm-flat text-muted-foreground text-emboss-recessed hover:text-accent focus-visible:outline-ring dark:text-muted-foreground dark:hover:text-accent from-surface to-muted inline-block bg-gradient-to-br px-2 py-1 text-sm;
+}
+@utility drawer-navlink {
+  @apply nm-raised text-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring dark:text-foreground dark:hover:text-accent from-surface to-muted block w-full bg-gradient-to-br px-4 py-3;
+}
+@utility neu-button {
+  @apply nm-raised text-foreground text-emboss-bold hover:text-accent focus-visible:outline-ring active:nm-pressed dark:text-foreground dark:hover:text-accent from-surface to-muted inline-flex items-center justify-center bg-gradient-to-br px-6 py-3 font-medium disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility neu-input {
+  @apply nm-pressed text-foreground text-emboss-soft border-border focus:ring-ring hover:nm-raised dark:text-foreground from-inset to-muted w-full rounded-lg border bg-gradient-to-br px-4 py-2 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility neu-select {
+  @apply nm-pressed text-foreground text-emboss-soft border-border focus:ring-ring hover:nm-raised dark:text-foreground from-inset to-muted w-full appearance-none rounded-lg border bg-gradient-to-br bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiA4bDYgNiAtNiA2Ij48L3BhdGg+PC9zdmc+')] bg-[length:1rem_1rem] bg-[right_0.75rem_center] bg-no-repeat px-4 py-2 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility neu-textarea {
+  @apply nm-pressed text-foreground text-emboss-soft border-border focus:ring-ring hover:nm-raised dark:text-foreground from-inset to-muted w-full resize-y rounded-lg border bg-gradient-to-br px-4 py-2 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+}

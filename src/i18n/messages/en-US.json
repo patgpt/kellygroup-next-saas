@@ -3,10 +3,51 @@
     "title": "Hello world!",
     "about": "Go to the about page"
   },
-  "UI": {
+  
+  "Navigation": {
+    "drawerLabel": "Main Navigation",
+    "openDrawer": "Open navigation drawer",
+    "close": "Close navigation drawer",
+    "menu": "Menu",
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "blog": "Blog",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register",
+    "settings": "Settings"
+  },
+  "Common": {
     "language": "Language",
+    "gallery": "Gallery",
     "theme": "Theme",
     "dark": "Dark",
-    "light": "Light"
+    "light": "Light",
+    "navigation": {
+      "title": "Navigation",
+      "description": "Access quick links and navigation",
+      "toggle": "Toggle navigation menu",
+      "close": "Close navigation menu",
+      "navigation_links": {
+        "home": "Home",
+        "services": "Services",
+        "blog": "Blog",
+        "about": "About",
+        "contact": "Contact"
+      }
+    },
+    "close": "Close",
+    "category": "Category",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout",
+    "about_us": "About Us",
+    "about_description": "Short description about your company or website.",
+    "quick_links": "Quick Links",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "follow_us": "Follow Us"
   }
 }

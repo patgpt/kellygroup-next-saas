@@ -3,10 +3,51 @@
     "title": "Bonjour le monde !",
     "about": "Aller à la page à propos"
   },
-  "UI": {
+  "Navigation": {
+    "drawerLabel": "Navigation principale",
+    "openDrawer": "Ouvrir le menu de navigation",
+    "close": "Fermer le menu de navigation",
+    "menu": "Menu",
+    "home": "Accueil",
+    "about": "À propos",
+    "services": "Services",
+    "blog": "Blog",
+    "contact": "Contact",
+    "login": "Connexion",
+    "register": "Inscription",
+    "settings": "Paramètres"
+  },
+  
+  "Common": {
+    "gallery": "Galerie",
     "language": "Langue",
     "theme": "Thème",
     "dark": "Sombre",
-    "light": "Clair"
+    "light": "Clair",
+    "navigation": {
+      "title": "Navigation",
+      "description": "Accéder aux liens rapides et à la navigation",
+      "toggle": "Ouvrir/fermer le menu de navigation",
+      "close": "Fermer le menu de navigation",
+      "navigation_links": {
+        "home": "Accueil",
+        "services": "Services",
+        "blog": "Blog",
+        "about": "À propos",
+        "contact": "Contact"
+      }
+    },
+    "close": "Fermer",
+    "category": "Catégorie",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "about_us": "À propos de nous",
+    "about_description": "Brève description de votre entreprise ou site web.",
+    "quick_links": "Liens rapides",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "follow_us": "Suivez-nous"
   }
 }
