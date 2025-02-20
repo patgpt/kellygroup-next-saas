@@ -1,0 +1,191 @@
+---
+description: These guidelines establish a structured and optimized approach for implementing Tailwind CSS (Version 4+) within Cursor AI projects. The objective is to maintain high standards of consistency, maintainability, and performance while leveraging Tailwind’s utility-first methodology.
+globs: *.css,*.tsx
+---
+# **Tailwind CSS (Version 4+) Guidelines for Cursor AI Projects**
+
+
+## **1. General Tailwind Usage**
+
+- **Do not use `tailwind.config.js/ts`.**
+  - All customization must be handled within `@theme` in the **`globals.css`** file.
+  - **Configuration files are strictly prohibited.**
+
+- **Use a unified Tailwind import:**
+  - Only `@import "tailwindcss";` should be used.
+  - Avoid manually importing Tailwind’s layers (`@tailwind base;`, etc.).
+
+---
+
+## **2. Theme Customization Using `@theme`**
+
+- **Prefer `@theme` over `:root` for defining CSS variables.**
+  - `@theme` dynamically generates utility classes, ensuring a consistent and scalable design system.
+  - This approach prevents unintended overrides and aligns with Tailwind’s utility-first methodology.
+
+```css
+@import "tailwindcss";
+
+@theme {
+  --color-mint-500: oklch(0.72 0.11 178);
+  --font-body: "Inter", sans-serif;
+  --spacing-6: 1.5rem;
+}
+```
+
+- **Utilize Theme Variable Namespaces to extend utilities systematically:**
+
+| **Namespace**       | **Utility Classes Created**                 |
+|---------------------|-------------------------------------------|
+| `--color-*`        | `bg-*`, `text-*`, `border-*`, etc.         |
+| `--font-*`         | `font-*` (e.g., `font-sans`)               |
+| `--text-*`         | `text-*` (e.g., `text-lg`)                 |
+| `--font-weight-*`  | `font-*` (e.g., `font-bold`)               |
+| `--tracking-*`     | `tracking-*` (e.g., `tracking-wide`)       |
+| `--leading-*`      | `leading-*` (e.g., `leading-tight`)        |
+| `--breakpoint-*`   | Responsive breakpoints (`sm:*`, `md:*`)   |
+| `--container-*`    | Container queries (`@sm:*`, `size-*`)      |
+| `--spacing-*`      | `p-*`, `m-*`, `gap-*`                      |
+| `--radius-*`       | `rounded-*`                                |
+| `--shadow-*`       | `shadow-*`                                 |
+| `--animate-*`      | `animate-*`                                |
+
+---
+
+## **3. Plugins & Extensibility**
+
+- **Register plugins exclusively through `@plugin`.**
+
+```css
+@import "tailwindcss";
+@plugin "tailwindcss/typography";
+@plugin "tailwindcss/forms";
+```
+
+---
+
+## **4. Utility & Component Customization**
+
+### **4.1 Component Classes (`@layer components`)**
+
+```css
+@layer components {
+  .card {
+    background-color: var(--color-white);
+    border-radius: var(--rounded-lg);
+    padding: var(--spacing-6);
+    box-shadow: var(--shadow-xl);
+  }
+}
+```
+
+### **4.2 Custom Variants (`@variant`)**
+
+```css
+.my-element {
+  background: white;
+  @variant dark {
+    background: black;
+  }
+}
+```
+
+#### **Nesting Variants**
+
+```css
+.my-element {
+  background: white;
+  @variant dark {
+    @variant hover {
+      background: black;
+    }
+  }
+}
+```
+
+### **4.3 Functional Utilities (`@custom-variant`)**
+
+```css
+@custom-variant pointer-coarse (@media (pointer: coarse));
+@custom-variant theme-midnight (&:where([data-theme="midnight"] *));
+```
+
+- Enables utilities such as `pointer-coarse:size-48` and `theme-midnight:bg-slate-900`.
+
+### **4.4 Applying Utility Classes (`@apply`)**
+
+```css
+.select2-dropdown {
+  @apply rounded-b-lg shadow-md;
+}
+.select2-search {
+  @apply rounded border border-gray-300;
+}
+.select2-results__group {
+  @apply text-lg font-bold text-gray-900;
+}
+```
+
+### **4.5 Using References (`@reference`)**
+
+```vue
+<template>
+  <h1>Hello world!</h1>
+</template>
+<style>
+  @reference "../../app.css";
+  h1 {
+    @apply text-2xl font-bold text-red-500;
+  }
+</style>
+```
+
+- When no customizations are applied, use `@reference "tailwindcss";`.
+
+---
+
+## **5. Tailwind Build-Time Functions**
+
+Tailwind provides functions that enhance maintainability by dynamically adjusting values.
+
+- **`--alpha()`** – Adjusts opacity dynamically while preserving the base color.
+
+```css
+.my-element {
+  color: --alpha(var(--color-lime-300) / 50%);
+}
+```
+
+- **`--spacing()`** – Ensures consistent spacing values based on predefined theme settings.
+
+```css
+.my-element {
+  margin: --spacing(4);
+}
+```
+
+- **Ideal for use within `calc()` for dynamic spacing adjustments:**
+
+```html
+<div class="py-[calc(--spacing(4)-1px)]"></div>
+```
+
+---
+
+## **Key Best Practices**
+
+✅ **Adhere to the following principles:**
+- **Utilize `@theme` exclusively in `globals.css`.**
+- **Ensure theme variables follow the proper namespace structure.**
+- **Register plugins only through `@plugin`.**
+- **Define reusable styles within `@utilities` before incorporating them into `@components`.**
+- **Leverage Tailwind’s JIT engine for optimal performance.**
+
+❌ **Avoid the following pitfalls:**
+- **Never use `tailwind.config.js/ts`.**
+- **Do not use `:root` for global styles.**
+- **Avoid manually importing Tailwind layers.**
+- **Do not use `@apply` within `@components` unless the utility is explicitly registered in `@utilities`.**
+
+
+

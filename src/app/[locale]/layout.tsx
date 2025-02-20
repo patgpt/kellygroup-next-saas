@@ -1,19 +1,5 @@
-import Footer from "@/components/Footer";
-import NavigationBar from "@/components/NavigationBar";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { Toaster } from "@/components/ui/sonner";
-import { graphql } from "@/gql";
-import { AppSettingsCollectionDocument } from "@/gql/graphql";
-import { fontMono, fontSans } from "@/lib/fonts";
-import { sdk } from "@/lib/query-client";
-import { cn } from "@/lib/utils";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import request from "graphql-request";
-import type { Metadata } from "next";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
-import { Locale, routing } from "../../i18n/routing";
+import { Metadata } from "next";
+import { routing } from "../../i18n/routing";
 import "./globals.css";
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,84 +10,11 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-interface RootLayoutProps {
+interface LocaleLayoutProps {
   children: React.ReactNode;
-  params: Promise<{ locale: Locale }>;
+  params: { locale: string };
 }
-interface AppSettingsCollectionQuery {
-  items: {
-    sys: {
-      id: string;
-    };
-  }[];
-}
-const appSettingsCollectionQuery = graphql(/* GraphQL */ `
-  query appSettingsCollection(
-    $locale: String!
-    $preview: Boolean!
-    $limit: Int!
-  ) {
-    appSettingsCollection(locale: $locale, preview: $preview, limit: $limit) {
-      items {
-        sys {
-          id
-        }
-      }
-    }
-  }
-`);
 
-export default async function RootLayout({
-  children,
-  params,
-}: RootLayoutProps) {
-  const { locale } = await params;
-  const messages = await getMessages();
-  // Enable static rendering
-  setRequestLocale(locale);
-  const { items } = await sdk.fetchQuery({
-    initialData: {
-      items: [],
-    },
-    queryKey: ["appSettings"],
-    queryFn: () =>
-      request({
-        url: process.env.CONTENTFUL_GRAPHQL_URL!,
-        document: AppSettingsCollectionDocument,
-        variables: {
-          locale,
-          preview: process.env.NODE_ENV === "development",
-          limit: 1,
-        },
-      }),
-  });
-  console.log(items);
-  return (
-    <html lang={locale ?? routing.defaultLocale} suppressHydrationWarning>
-      <body
-        className={cn(
-          fontSans.variable,
-          fontMono.variable,
-          "bg-background dark:bg-accent flex h-screen w-full flex-col items-center justify-start antialiased",
-        )}
-      >
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <QueryClientProvider client={sdk}>
-              <NavigationBar />
-              {children}
-              <Toaster />
-              <Footer />
-              <ReactQueryDevtools initialIsOpen={false} />
-            </QueryClientProvider>
-          </ThemeProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
-  );
+export default function LocaleLayout({ children, params }: LocaleLayoutProps) {
+  return children;
 }

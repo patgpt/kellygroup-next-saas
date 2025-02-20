@@ -1,5 +1,0 @@
-query getAppSettings($locale: String, $preview: Boolean, $limit: Int) {
-  appSettingsCollection(limit: $limit, preview: $preview, locale: $locale) {
-    ...AppSettingsFields
-  }
-}

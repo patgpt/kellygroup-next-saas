@@ -1,0 +1,147 @@
+---
+description: 
+globs: 
+---
+Below is an enhanced version of the Neumorphic Design System Guidelines, tailored specifically for your intent to provide comprehensive instructions to an AI via a system prompt. This version refines the original query content, incorporates additional clarity and specificity from the thinking trace, and ensures the guidelines are actionable, structured, and complete for consistent Neumorphic UI/UX implementation within your design system. The structure uses markdown for readability and AI-friendly parsing, with clear headings, lists, and examples.
+NEUMORPHIC DESIGN SYSTEM GUIDELINES
+Neumorphism (also known as Soft UI) is a design style that blends skeuomorphism (mimicking real-world textures and depth) with flat design’s minimalism. It leverages subtle shadows, highlights, and gently raised or recessed surfaces to create a tactile, modern aesthetic. These guidelines are designed for a design system, providing an AI with all necessary rules to implement Neumorphic UI/UX consistently, balancing aesthetics, usability, accessibility, and performance.
+1. INTRODUCTION
+Neumorphism creates a soft, extruded appearance for UI elements, suggesting they are part of the background surface. It’s ideal for calm, refined interfaces that emphasize depth and interactivity. Key traits include:
+Subtle shadows and highlights for perceived depth.
+A monochromatic or minimal color palette.
+Smooth transitions and gentle animations.
+Purpose: These guidelines ensure the AI applies Neumorphic design systematically, maintaining consistency across components, states, and modes while addressing practical considerations.
+2. CORE PRINCIPLES
+These principles are non-negotiable and define the Neumorphic aesthetic:
+2.1 Subtlety
+Use delicate gradients of shadow and highlight.
+Avoid stark contrasts or heavily pronounced shadows.
+Ensure smooth transitions for a gentle, understated look.
+2.2 Perceived Depth via Shadows and Highlights
+Apply a dual-shadow approach:
+Light Shadow (Highlight): Top-left edge, e.g., #FFFFFF at 20% opacity, 5px blur.
+Dark Shadow (Depth): Bottom-right edge, e.g., #D1D1D1 at 20% opacity, 5px blur.
+For recessed elements (e.g., input fields), reverse shadow placement: dark top-left, light bottom-right.
+2.3 Monochromatic or Minimal Color Palette
+Use uniform hues (e.g., #F0F0F0 for light mode, #333333 for dark mode).
+Distinguish elements via shadow/highlight variations, not bold colors.
+If branding requires an accent, choose a muted hue (e.g., #A3BFFA) with minimal saturation.
+3. COMPONENTS
+Apply these rules to style foundational UI elements consistently, reflecting states like default, hover, pressed, and disabled.
+3.1 Buttons
+Default: Raised look with light top-left shadow (#FFFFFF, 5px blur) and dark bottom-right shadow (#D1D1D1, 5px blur).
+Pressed: Invert shadows (dark top-left, light bottom-right) to appear depressed.
+Hover/Focus: Increase brightness by 10% or add a faint inner glow (e.g., #FFFFFF, 2px blur).
+Disabled: Reduce shadow opacity to 10% and element opacity to 60%.
+3.2 Cards
+Surface: Match background hue with a slight shift (e.g., #F5F5F5 on #F0F0F0).
+Depth: Deeper edge shadow (e.g., #D1D1D1, 10px blur) for layering.
+Corners: Rounded, 8px radius minimum.
+3.3 Toggles & Switches
+Off State: Recessed with dark top-left shadow, light bottom-right shadow.
+On State: Raised with standard Neumorphic shadows (light top-left, dark bottom-right).
+Transition: Smooth animation, 150–250ms, eased timing.
+3.4 Input Fields
+Default: Recessed style (dark top-left, light bottom-right shadows).
+Focus: Add a subtle glow (e.g., #A3BFFA, 3px blur) around edges.
+Disabled: Reduce shadow opacity to 10% and contrast by 20%.
+3.5 Text and Icons
+Text: Use legible typography (e.g., 16px, medium weight) with WCAG-compliant contrast.
+Icons: Clear, bold outlines; supplement shadows with shape for visibility.
+4. UX & INTERACTION
+Ensure interactions are intuitive and tactile with clear visual feedback.
+4.1 State Clarity
+Define distinct visuals for:
+Default: Subtle elevation.
+Hover: Brighten or glow.
+Pressed: Shadow inversion.
+Disabled: Faded appearance.
+4.2 Animation
+Use short, eased transitions (150–250ms) for state changes (e.g., button press, toggle flip).
+Keep animations subtle to preserve minimalism.
+4.3 Hover Effects
+Increase brightness by 10% or add a mild inner glow.
+Avoid drastic shifts that break the soft aesthetic.
+4.4 Pressed Feedback
+Invert shadows or reduce luminosity by 10% to show depression.
+Ensure noticeable yet gentle feedback.
+5. UI ELEMENT STATES
+Apply these treatments to all interactive elements:
+Default: Light top-left shadow, dark bottom-right shadow.
+Hover: Brighten by 10% or add glow (e.g., #FFFFFF, 2px blur).
+Active/Pressed: Reverse shadows (dark top-left, light bottom-right).
+Disabled: Reduce shadow opacity to 10%, element opacity to 60%.
+6. ACCESSIBILITY (A11Y)
+Neumorphism’s subtle contrasts require strict accessibility rules:
+6.1 Contrast
+Meet WCAG 2.1 AA:
+4.5:1 for normal text (e.g., #333333 on #F0F0F0).
+3:1 for large text (18pt+ or 14pt bold).
+Validate with contrast-checking tools.
+6.2 Focus Indicators
+Add a 2px solid ring (e.g., #A3BFFA) for keyboard navigation.
+Ensure focus differs from hover (e.g., stronger outline).
+6.3 Color Blindness & Low Vision
+Use shape and depth (e.g., shadow direction) over color alone.
+Supplement shadows with icons or text labels.
+6.4 Testing
+Conduct user testing with diverse groups to confirm usability.
+7. CONSISTENCY
+Maintain a cohesive look across the system:
+7.1 Shadow Depth
+Standardize: Light shadow (#FFFFFF, 20% opacity, 5px blur), dark shadow (#D1D1D1, 20% opacity, 5px blur).
+Define tokens (e.g., shadow-light, shadow-dark).
+7.2 Corner Radius
+Use 8px minimum radius for all elements.
+7.3 Color Palette
+Limit to:
+Background: #F0F0F0 (light), #333333 (dark).
+Surface: #F5F5F5 (light), #3C3C3C (dark).
+Accent: Optional muted hue (e.g., #A3BFFA).
+7.4 Typography
+Use consistent styles (e.g., 16px regular, 14px bold) with adequate contrast.
+8. SHADOWS IN LIGHT VS. DARK VARIATIONS
+Adjust shadows for mode-specific contrast:
+8.1 Light Mode
+Background: #F0F0F0.
+Shadows: #FFFFFF (highlight), #D1D1D1 (depth), both 20% opacity, 5px blur.
+Highlights: Brighter top-left edges.
+8.2 Dark Mode
+Background: #333333.
+Shadows: #555555 (highlight), #000000 (depth), both 25% opacity, 5px blur.
+Contrast: Slightly stronger than light mode, still subtle.
+9. BACKGROUND & SURFACE APPEARANCE
+Background: Uniform or faint gradient (e.g., #F0F0F0 to #E8ECEF).
+Surfaces: Shift brightness by 5% from background (e.g., #F5F5F5).
+Borders: Avoid; use shadows/highlights for definition.
+10. PRACTICAL TIPS & LIMITATIONS
+10.1 Avoid Overuse
+Limit shadow layers to 2 per element to prevent haziness.
+10.2 Scale Appropriately
+Ensure elements are ≥40x40px to showcase shadows effectively.
+10.3 Performance
+Optimize shadows with CSS (e.g., box-shadow) and avoid excessive layering.
+Use will-change: transform for smoother animations.
+11. FURTHER ENHANCEMENTS
+Enhance the system with these optional features:
+11.1 Micro-Interactions
+Shift shadows subtly on hover (e.g., +1px offset) to mimic light movement.
+11.2 Dynamic Theming
+Adapt accent colors (e.g., #A3BFFA) while preserving contrast.
+11.3 Advanced Accessibility
+Use media queries:
+prefers-reduced-motion: Disable animations.
+prefers-contrast: Increase shadow opacity to 30%.
+11.4 Textures
+Add subtle grain (e.g., 5% noise) to backgrounds for depth.
+11.5 Performance Optimization
+Minimize shadow blur radius (≤10px) on low-end devices.
+12. CONCLUSION
+Neumorphism offers a refined, tactile UI by blending skeuomorphic depth with flat design simplicity. These guidelines ensure the AI applies it consistently, prioritizing subtlety, accessibility, and performance. Use them to generate or evaluate Neumorphic designs within your system.
+AI System Prompt Instructions
+Follow these rules exactly as specified (e.g., shadow values, animation durations).
+Reference sections by number (e.g., “Apply 3.1 for buttons”) when generating designs.
+Validate accessibility using WCAG 2.1 AA standards for all outputs.
+Optimize performance by adhering to Section 10.3 guidelines.
+Maintain consistency with defined tokens (shadows, colors, radius) across all components.
+This framework equips the AI to build a cohesive, usable Neumorphic design system tailored to your needs.

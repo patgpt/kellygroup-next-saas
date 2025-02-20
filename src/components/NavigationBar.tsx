@@ -1,87 +1,66 @@
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuContent,
-} from "@/components/ui/navigation-menu";
-import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-  SheetClose,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Menu, ChevronDown, ChevronUp } from "lucide-react"; // Import icons for the menu and dropdown
 import I18nNavigationLink from "@/components/I18nNavigationLink";
 import LanguageSwitcher from "@/components/LanguageSelect";
 import ModeToggle from "@/components/ThemeToggle";
+import { Button } from "@/components/ui/button";
 import {
   Collapsible,
-  CollapsibleTrigger,
   CollapsibleContent,
+  CollapsibleTrigger,
 } from "@/components/ui/collapsible"; // Import Collapsible components
+import {
+  NavigationMenu,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { getContentful } from "@/lib/contentful";
+import { ChevronDown, Menu } from "lucide-react"; // Import icons for the menu and dropdown
+
 import { getLocale } from "next-intl/server";
 import { draftMode } from "next/headers";
-import type { ComponentNavigation } from "@/graphql/__generated__/sdk";
 
 async function NavigationBar() {
   const locale = await getLocale();
   const { isEnabled: preview } = await draftMode();
-  const client = getContentful(preview);
-  const appSettings = await client.getAppSettings({
-    locale: locale,
-    preview: preview,
-  });
-  const data = appSettings.data?.appSettingsCollection?.items[0];
-  const title = data?.appTitle ?? "KellyGroup";
-  const navigation = data?.headerNavigation?.itemsCollection?.items;
+  // const { data, errors } = await sdk.fetchQuery({
+  //   queryKey: ["componentNavigationItemsCollection"],
+  //   queryFn: () =>
+  //     request({
+  //       url: process.env.CONTENTFUL_GRAPHQL_URL!,
+  //       document: NavigationItemsCollectionDocument,
+  //       variables: {
+  //         locale,
+  //         preview,
+  //       },
+  //     }),
+  // });
+  // if (errors) {
+  //   throw new Error(errors.message);
+  // }
+  // const { navigationCollection } = data;
+  // const title = navigationCollection[0]?.name ?? "KellyGroup";
+
+  // const navigation = data?.navigationCollection?.itemsCollection?.items;
+  // console.log(navigation);
+  // console.log(title);
+  // if (!navigation) {
+  //   return notFound();
+  // }
   return (
     <div className="bg-primary text-accent-foreground dark:bg-accent dark:text-accent-background sticky top-0 z-50 flex w-full items-center justify-between border-b p-4 shadow-2xl">
       {/* Site Title */}
       <I18nNavigationLink href="/" className="text-lg font-bold">
-        {title}
+        KellyGroup
       </I18nNavigationLink>
 
       {/* Desktop Navigation Menu (hidden on small screens) */}
       <div className="hidden md:flex">
         <NavigationMenu>
-          <NavigationMenuList>
-            {navigation?.map((item, index) => {
-              return (
-                <NavigationMenuItem
-                  className="btn bg-foreground hover:bg-accent rounded-md p-2 shadow-md"
-                  key={index}
-                >
-                  <I18nNavigationLink
-                    href={item?.slug!}
-                    className="text-primary-foreground px-4 py-4"
-                  >
-                    {item?.name!}
-                  </I18nNavigationLink>
-
-                  {/* <NavigationMenuContent>
-                    <ul className="flex flex-col space-y-2">
-                      {item.children?.map((child, index) => {
-                        return (
-                          <li key={index}>
-                            <I18nNavigationLink
-                              href={child.link}
-                              className="px-4 py-2"
-                            >
-                              {child.label}
-                            </I18nNavigationLink>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </NavigationMenuContent> */}
-                </NavigationMenuItem>
-              );
-            })}
-          </NavigationMenuList>
+          <NavigationMenuList></NavigationMenuList>
         </NavigationMenu>
       </div>
 

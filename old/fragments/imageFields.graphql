@@ -1,6 +1,0 @@
-fragment ImageFields on Asset {
-  url
-  description
-  title
-  size
-}

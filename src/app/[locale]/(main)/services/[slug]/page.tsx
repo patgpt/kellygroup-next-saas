@@ -1,59 +1,67 @@
 import { routing } from "@/i18n/routing";
-import { getContentful } from "@/lib/contentful";
+
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 
+import I18nNavigationLink from "@/components/I18nNavigationLink";
+import sdk from "@/lib/contentful";
+import { Logger } from "@/lib/utils";
 import type { PageParams } from "@/types/common";
+import { ArrowRightIcon } from "lucide-react";
 
 export async function generateStaticParams() {
   return routing.locales.flatMap(async (locale) => {
-    const client = getContentful(false);
-    const data = await client.getAllBlogPosts({
-      locale: locale,
-    });
-
-    const posts = data.data.pageBlogPostCollection?.items;
-    return posts?.map((post) => {
-      if (!post?.slug || !locale) {
-        return notFound();
-      }
-      return {
-        params: {
-          locale,
-          slug: post.slug,
-        },
-      };
-    });
+    return {
+      params: {
+        locale,
+        slug: await sdk
+          .ServicesQuery({
+            locale: locale,
+            preview: false,
+          })
+          .then((res) =>
+            res.data.pageServiceCollection?.items.map((item) => item?.slug),
+          )
+          .catch((err) => {
+            throw new Error(err);
+          }),
+      },
+    };
   });
 }
 
 const Page = async ({ params }: PageParams) => {
-  const { locale, slug } = await params;
+  const slug = (await params).slug;
+  const locale = (await params).locale;
+  Logger("info", slug);
   const { isEnabled: preview } = await draftMode();
-
-  try {
-    const client = getContentful(preview);
-    const response = await client.getServiceBySlug({
-      locale,
-      slug,
-    });
-
-    if (response.errors || !response.data?.pageServiceCollection?.items?.[0]) {
-      return notFound();
-    }
-
-    const service = response.data.pageServiceCollection.items[0];
-
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold">{service.title}</h1>
-        {/* Add more service details here */}
-      </div>
-    );
-  } catch (error) {
-    console.error("Failed to fetch service:", error);
+  if (slug === undefined) {
     return notFound();
   }
+  const response = await sdk.ServiceBySlugQuery({
+    locale,
+    slug,
+    preview,
+  });
+  const service = response.data.pageServiceCollection?.items?.[0];
+  if (response.errors || !service) {
+    return notFound();
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <I18nNavigationLink href={`/${locale}/services`}>
+        <ArrowRightIcon className="h-4 w-4" />
+        Back to services
+      </I18nNavigationLink>
+      <I18nNavigationLink href={`/${locale}/services/${service.slug}`}>
+        <ArrowRightIcon className="h-4 w-4" />
+        {service.slug}
+      </I18nNavigationLink>
+
+      {/* Add more service details here */}
+    </div>
+  );
 };
 
 export default Page;

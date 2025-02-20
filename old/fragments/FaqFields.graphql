@@ -1,7 +1,0 @@
-fragment FaqFields on ComponentFaq {
-  sys {
-    id
-  }
-  question
-  answer
-}

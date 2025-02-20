@@ -1,0 +1,343 @@
+prompt,example,category
+"Create a complex neumorphic modal with focus trap","```tsx
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    if (isOpen) {
+      const focusable = modalRef.current?.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      focusable?.[0]?.focus();
+    }
+  }, [isOpen]);
+
+  return (
+    <div
+      role='dialog'
+      aria-modal='true'
+      ref={modalRef}
+      className={`
+        fixed inset-0 z-50 flex items-center justify-center p-4
+        bg-bg/80 backdrop-blur transition-opacity
+        ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+      `}
+    >
+      <div className='
+        bg-surface max-w-md w-full rounded-default shadow-raised
+        dark:bg-surface dark:shadow-raised p-6 space-y-4
+        focus-within:outline focus-within:outline-2 focus-within:outline-accent
+      '>
+        {children}
+      </div>
+    </div>
+  );
+}```","Components"
+"Implement an animated neumorphic accordion","```tsx
+const Accordion: React.FC<AccordionProps> = ({ items }) => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  
+  return (
+    <div className='space-y-2'>
+      {items.map((item, index) => (
+        <div key={index} className='bg-surface rounded-default overflow-hidden'>
+          <button
+            aria-expanded={activeIndex === index}
+            onClick={() => setActiveIndex(index === activeIndex ? null : index)}
+            className='
+              w-full p-4 text-left flex justify-between items-center
+              shadow-raised hover:brightness-110
+              transition-all duration-200
+              aria-expanded:shadow-pressed
+            '
+          >
+            {item.title}
+            <svg className={`
+              w-5 h-5 transition-transform duration-200
+              ${activeIndex === index ? 'rotate-180' : ''}
+            `}>
+              {/* Chevron icon */}
+            </svg>
+          </button>
+          <div className={`
+            bg-surface/50 overflow-hidden transition-all duration-200
+            ${activeIndex === index ? 'max-h-96 p-4' : 'max-h-0'}
+          `}>
+            {item.content}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}```","Components"
+"Create a dynamic theme switcher with color interpolation","```tsx
+const ThemeSwitcher: React.FC = () => {
+  const [theme, setTheme] = useState('light');
+  
+  useEffect(() => {
+    const root = document.documentElement;
+    const colors = {
+      light: {
+        bg: 'oklch(0.95 0.01 200)',
+        surface: 'oklch(0.97 0.01 200)',
+        shadowLight: 'oklch(1 0 0 / 0.2)',
+        shadowDark: 'oklch(0 0 0 / 0.1)'
+      },
+      dark: {
+        bg: 'oklch(0.2 0.01 200)',
+        surface: 'oklch(0.25 0.01 200)',
+        shadowLight: 'oklch(1 0 0 / 0.1)',
+        shadowDark: 'oklch(0 0 0 / 0.2)'
+      }
+    };
+
+    Object.entries(colors[theme]).forEach(([key, value]) => {
+      root.style.setProperty(`--color-${key}`, value);
+    });
+  }, [theme]);
+
+  return (
+    <button
+      onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}
+      className='
+        bg-surface shadow-raised p-4 rounded-default
+        hover:brightness-110 active:shadow-pressed
+        transition-all duration-200
+      '
+    >
+      {theme === 'light' ? '🌙' : '☀️'}
+    </button>
+  );
+}```","Theme"
+"Build a responsive neumorphic dashboard layout","```tsx
+const Dashboard: React.FC = () => {
+  return (
+    <div className='min-h-screen bg-bg p-4 md:p-8 dark:bg-bg'>
+      <div className='@container mx-auto max-w-7xl'>
+        <header className='
+          bg-surface shadow-raised rounded-default p-6 mb-8
+          flex flex-col sm:flex-row sm:items-center sm:justify-between
+          dark:bg-surface dark:shadow-raised
+        '>
+          <h1 className='text-2xl font-medium text-text dark:text-text'>
+            Dashboard
+          </h1>
+          <nav className='mt-4 sm:mt-0 flex gap-4'>
+            <ThemeSwitcher />
+            <NotificationBell />
+            <UserMenu />
+          </nav>
+        </header>
+
+        <div className='grid grid-cols-1 @md:grid-cols-2 @xl:grid-cols-3 gap-8'>
+          <div className='@container'>
+            <Card className='h-full'>
+              <div className='flex flex-col @sm:flex-row gap-4'>
+                <div className='@sm:w-1/2'>
+                  <ChartComponent />
+                </div>
+                <div className='@sm:w-1/2 space-y-4'>
+                  <StatsList />
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          <Card className='@xl:col-span-2'>
+            <DataTable />
+          </Card>
+
+          <Card>
+            <ActivityFeed />
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+}```","Layout"
+"Implement an accessible form with complex validation","```tsx
+const ContactForm: React.FC = () => {
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const validate = (data: FormData) => {
+    const newErrors = {};
+    // Validation logic
+    return newErrors;
+  };
+
+  return (
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      className='space-y-6'
+      noValidate
+    >
+      <div role='alert' aria-live='polite' className='sr-only'>
+        {Object.values(errors).join(', ')}
+      </div>
+
+      <FormGroup
+        label='Email'
+        htmlFor='email'
+        error={errors.email}
+        required
+      >
+        <Input
+          id='email'
+          type='email'
+          aria-describedby='email-error'
+          className={`
+            w-full
+            ${errors.email ? 'shadow-error' : 'shadow-pressed'}
+          `}
+        />
+        {errors.email && (
+          <span id='email-error' className='text-error text-sm'>
+            {errors.email}
+          </span>
+        )}
+      </FormGroup>
+
+      <FormGroup
+        label='Message'
+        htmlFor='message'
+        error={errors.message}
+        required
+      >
+        <textarea
+          id='message'
+          aria-describedby='message-error'
+          className={`
+            w-full min-h-[120px] bg-surface rounded-default p-3
+            ${errors.message ? 'shadow-error' : 'shadow-pressed'}
+            focus:outline-accent focus:outline-2 focus:outline-offset-2
+            resize-vertical
+          `}
+        />
+      </FormGroup>
+
+      <Button
+        type='submit'
+        className='w-full'
+        aria-disabled={Object.keys(errors).length > 0}
+      >
+        Send Message
+      </Button>
+    </form>
+  );
+}```","Forms"
+"Create a custom animation system for neumorphic elements","```css
+@layer components {
+  .animate-press {
+    animation: press 0.2s ease forwards;
+  }
+
+  .animate-raise {
+    animation: raise 0.2s ease forwards;
+  }
+
+  @keyframes press {
+    from {
+      box-shadow: var(--shadow-raised);
+      transform: scale(1);
+    }
+    to {
+      box-shadow: var(--shadow-pressed);
+      transform: scale(0.98);
+    }
+  }
+
+  @keyframes raise {
+    from {
+      box-shadow: var(--shadow-pressed);
+      transform: scale(0.98);
+    }
+    to {
+      box-shadow: var(--shadow-raised);
+      transform: scale(1);
+    }
+  }
+
+  /* Complex hover animation */
+  .hover-glow {
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at var(--mouse-x) var(--mouse-y),
+        var(--color-shadow-light) 0%,
+        transparent 50%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover::before {
+      opacity: 0.5;
+    }
+  }
+}
+
+/* Custom animation utilities */
+@utility animate-* {
+  animation: --value(--animate-*, [string]);
+}
+
+@utility duration-* {
+  animation-duration: --value([time]);
+}
+
+@utility ease-* {
+  animation-timing-function: --value(--ease-*, [string]);
+}```","Utilities"
+"Implement advanced ARIA live regions and announcements","```tsx
+const LiveRegion: React.FC<LiveRegionProps> = ({
+  messages,
+  type = 'polite'
+}) => {
+  const [announcement, setAnnouncement] = useState('');
+  
+  useEffect(() => {
+    if (messages.length > 0) {
+      const message = messages[messages.length - 1];
+      setAnnouncement(message);
+      
+      // Clear after announcement
+      const timer = setTimeout(() => {
+        setAnnouncement('');
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [messages]);
+
+  return (
+    <>
+      <div
+        role='status'
+        aria-live='polite'
+        className='sr-only'
+      >
+        {type === 'polite' && announcement}
+      </div>
+      <div
+        role='alert'
+        aria-live='assertive'
+        className='sr-only'
+      >
+        {type === 'assertive' && announcement}
+      </div>
+      <div
+        aria-atomic='true'
+        className='sr-only'
+      >
+        {type === 'atomic' && announcement}
+      </div>
+    </>
+  );
+}```","Accessibility" 

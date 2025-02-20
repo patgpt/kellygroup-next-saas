@@ -1,0 +1,89 @@
+prompt,example,category
+"Create a neumorphic button with hover and active states","```css
+.btn {
+  @apply bg-surface rounded-default shadow-raised transition-shadow duration-200;
+  &:hover { @apply brightness-110 }
+  &:active { @apply shadow-pressed scale-98 }
+}```","Components"
+"Implement a dark mode compatible card","```css
+.card {
+  @apply bg-surface dark:bg-surface shadow-raised dark:shadow-raised p-6 rounded-default;
+}```","Components"
+"Style a form input with neumorphic design","```css
+.input {
+  @apply bg-surface shadow-pressed rounded-default p-2 focus:outline-accent focus:outline-2;
+}```","Forms"
+"Create an accessible toggle switch","```css
+.toggle {
+  @apply bg-surface rounded-default h-6 w-12 transition-shadow;
+  &[aria-checked=true] { @apply shadow-raised }
+  &[aria-checked=false] { @apply shadow-pressed }
+}```","Components"
+"Define theme colors for neumorphic design","```css
+@theme {
+  --color-bg: oklch(0.95 0.01 200);
+  --color-surface: oklch(0.97 0.01 200);
+  --color-shadow-light: oklch(1 0 0 / 0.2);
+  --color-shadow-dark: oklch(0 0 0 / 0.1);
+}```","Theme"
+"Create a responsive navigation menu","```tsx
+<nav className='flex flex-col md:flex-row md:items-center gap-4'>
+  <Logo />
+  <div className='hidden md:flex gap-4'>
+    <NavLinks />
+  </div>
+</nav>```","Layout"
+"Style a form group with label and error state","```tsx
+<FormGroup label='Email' error='Invalid email'>
+  <Input type='email' className='w-full' />
+</FormGroup>```","Forms"
+"Implement container query based card","```html
+<div className='@container'>
+  <div className='flex flex-col @md:flex-row gap-4'>
+    <img className='w-full @md:w-48' />
+    <div className='space-y-2'>
+      <h2>Title</h2>
+      <p>Content</p>
+    </div>
+  </div>
+</div>```","Layout"
+"Create focus-visible styles for accessibility","```css
+.element {
+  @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2;
+}```","Accessibility"
+"Define shadow tokens for different elevations","```css
+@theme {
+  --shadow-sm: 2px 2px 4px var(--shadow-dark), -2px -2px 4px var(--shadow-light);
+  --shadow-md: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+  --shadow-lg: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+}```","Theme"
+"Create a custom utility for content visibility","```css
+@utility content-auto {
+  content-visibility: auto;
+}```","Utilities"
+"Implement reduced motion preferences","```css
+@media (prefers-reduced-motion: reduce) {
+  * {
+    @apply transition-none animate-none;
+  }
+}```","Accessibility"
+"Style a status indicator with color and icon","```css
+.status {
+  @apply flex items-center gap-2 p-2 rounded-default;
+  &.success {
+    @apply text-green-700 bg-green-100;
+    &::before { content: '✓'; }
+  }
+}```","Components"
+"Create a custom variant for touch devices","```css
+@custom-variant touch {
+  @media (pointer: coarse) {
+    @slot;
+  }
+}```","Utilities"
+"Implement high contrast mode support","```css
+@media (prefers-contrast: high) {
+  .element {
+    @apply outline-2 outline-current shadow-none;
+  }
+}```","Accessibility" 

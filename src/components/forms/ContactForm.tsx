@@ -1,11 +1,11 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { formSchema } from "./contact-schema";
 import type { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { formSchema } from "./contact-schema";
 
-import { Input } from "@/components/ui/input";
+import { onSubmit } from "@/app/actions/contact-submit";
 import {
   Form,
   FormControl,
@@ -15,16 +15,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { onSubmit } from "@/app/actions/contact-submit";
 import { toast } from "sonner";
-import { Select } from "@radix-ui/react-select";
-import {
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 export default function ContactForm() {
   const form = useForm<z.infer<typeof formSchema>>({
